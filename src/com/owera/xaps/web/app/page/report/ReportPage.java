@@ -146,6 +146,7 @@ public class ReportPage extends AbstractWebPage {
 
 		Map<String, Object> templateMap = outputHandler.getTemplateMap();
 
+		/* Morten jan 2014 - Certificate checks disable due to open source 
 		// Display exception page if certificate for report is not present
 		if (!CertificateVerification.isCertificateValid(Certificate.CERT_TYPE_REPORT, req.getSession().getId())
 				|| !SessionCache.getSessionData(req.getHttpServletRequest().getSession().getId()).getUser().isReportsAllowed()) {
@@ -153,6 +154,7 @@ public class ReportPage extends AbstractWebPage {
 			outputHandler.setTemplatePath("/exception.ftl");
 			return;
 		}
+		*/
 
 		// 4
 		reportType = ReportType.getEnum(pageType);

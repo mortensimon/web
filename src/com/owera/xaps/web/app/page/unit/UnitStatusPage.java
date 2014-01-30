@@ -199,11 +199,13 @@ public class UnitStatusPage extends AbstractWebPage {
 		
 		Map<String, Object> templateMap = outputHandler.getTemplateMap();
 		
+		/* Morten jan 2014 - Certificate checks disabled due to open source
 		if(!CertificateVerification.isCertificateValid(Certificate.CERT_TYPE_REPORT, sessionId) || !SessionCache.getSessionData(sessionId).getUser().isReportsAllowed()){ // If not valid (see the "!")
 			templateMap.put("message", "No valid certificate found for Reports page. Please contact your systems administrator.");
 			outputHandler.setTemplatePath("/exception.ftl");
 			return;
 		}
+		*/
 
 		XAPSUnit xapsUnit = XAPSLoader.getXAPSUnit(sessionId);
 		

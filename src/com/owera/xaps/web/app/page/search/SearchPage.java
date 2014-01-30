@@ -74,8 +74,9 @@ public class SearchPage extends AbstractWebPage {
 		map.put("advanced", advanced);
 		map.put("operators", Parameter.Operator.values());
 		map.put("datatypes", Parameter.ParameterDataType.values());
-		boolean isReportCertValid = CertificateVerification.isCertificateValid(Certificate.CERT_TYPE_REPORT, params.getSession().getId());
-		boolean isReportAllowed = SessionCache.getSessionData(params.getHttpServletRequest().getSession().getId()).getUser().isReportsAllowed();
+		/* Morten jan 2014 - certificate checks are not necessary after going open-source */
+		boolean isReportCertValid = true/*CertificateVerification.isCertificateValid(Certificate.CERT_TYPE_REPORT, params.getSession().getId())*/;
+		boolean isReportAllowed = true/*SessionCache.getSessionData(params.getHttpServletRequest().getSession().getId()).getUser().isReportsAllowed()*/;
 		map.put("reportvalid", isReportCertValid && isReportAllowed);
 
 		String cmd = params.getParameter("cmd");

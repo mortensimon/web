@@ -79,11 +79,13 @@ public class UnitStatusRealTimeMosPage extends AbstractWebPage {
 		
 		Map<String, Object> root = outputHandler.getTemplateMap();
 		
+		/* Morten jan 2014 - Certificate checks disabled due to open source
 		if(!CertificateVerification.isCertificateValid(Certificate.CERT_TYPE_REPORT, sessionId)){ // If not valid (see the "!")
 			root.put("message", "No valid certificate found for Reports page. Please contact your systems administrator.");
 			outputHandler.setTemplatePath("/exception.ftl");
 			return;
 		}
+		*/
 		
 		Unittype unittype = null;
 		if(inputData.getUnittype().notNullNorValue(""))
