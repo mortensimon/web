@@ -1,3 +1,8 @@
+v2.2.52 (2014-09-03)
+- bug: changed a URL in xaps-web.properties to point to port 80 by default
+- bug: some references to "xapsmonitor" was corrected to "monitor"
+- bug: login form explicitly posts to /web/login, instead of the relative path of "login". This should make things
+work when a user access http://host/ and is subsequently redirected to http://host/web. 
 v2.2.51 (2013-08-22)
 - ref: No longer possible to directly edit job-parameters in SOFTWARE, RESET or RESTART jobs (can cause inconsistency)
 v2.2.50 (2013-05-27)
