@@ -90,3 +90,18 @@ xAPS.createModule("unit.inspection",function($this,$super,$){
 		}
 	}
 });
+
+/**
+ * Adding functionality check if the page needs to be reloaded before form submission
+ */
+$(function() {
+	$("#firstinput").focus(function() {
+		$("#main-content-form").bind('submit.filter', function(event) {
+			TABLETREE.filterParameters();
+			return false;
+		});
+	});
+	$("#firstinput").blur(function() {
+		$("#main-content-form").unbind('submit.filter');
+	});
+});

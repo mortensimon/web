@@ -11,7 +11,7 @@
     							}
     							window.onload = rewriteURLToAvoidDuplicateUpdate;
 							</script>
-							<@macros.form>
+							<@macros.form id="main-content-form">
 								<input name="unit" type="hidden" value="${unit.id}" />
 								<input name="unittype" type="hidden" value="${unittype}" />
 								<table width="100%" cellspacing="0" cellpadding="0">
@@ -229,8 +229,8 @@
 
 										<tr>
 											<td>
-												<input name="filterstring" id="firstinput" type="text" onkeypress="if (event.keyCode == 13) { TABLETREE.filterParameters(); event.returnValue=false; event.cancel=true; return false; }" size="30" value="${string}" tabindex="1" class="tiptip" title="Filter parameter names. Regular expression are allowed" />
-												<button type="button" value="Filter parameters" name="filterParamBtn" id="filterParamBtn" onclick="TABLETREE.filterParameters();">Filter</button>
+												<input name="filterstring" id="firstinput" type="text" size="30" value="${string}" tabindex="1" class="tiptip" title="Filter parameter names. Regular expression are allowed" />
+												<button type="button" value="Filter" onclick="TABLETREE.filterParameters();" name="filterParamButton">Filter</button>		
 											</td>
 											<td style="width: 1px; white-space: nowrap;" colspan="2">
 												<select name="filterflag" size="1" onchange="TABLETREE.filterParameters();" tabindex="2">
