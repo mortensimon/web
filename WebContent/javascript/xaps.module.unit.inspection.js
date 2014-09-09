@@ -90,20 +90,3 @@ xAPS.createModule("unit.inspection",function($this,$super,$){
 		}
 	}
 });
-
-/**
- * Adds functionality to update the parameter filter with enter 
- * without submitting the form.
- */
-$(function() {
-	$("#firstinput").focus(function() {
-		$("#main-content-form").bind('submit.filter', function(event) {
-			TABLETREE.filterParameters();
-			return false;
-		});
-	}).blur(function() {
-		$("#main-content-form").unbind('submit.filter');
-	}).removeAttr('disabled')
-	.focus();
-	$("#filterBtn").removeAttr('disabled');
-});
