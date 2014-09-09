@@ -7,11 +7,31 @@
 								});
 								function rewriteURLToAvoidDuplicateUpdate() {
         							history.replaceState({},'Dummy','?page=unit-configuration&init_refreshpage=Refresh');
-        							document.getElementById('firstinput').focus();
+        							activateFirstInput();
+    							}
+    							function interceptSubmit(event) {
+    								if (!event)
+    									event = window.event;
+    								TABLETREE.filterParameters();
+    								event.preventDefault();
+    								event.stopPropagation();
+    								return false;
+    							}
+    							function activateFirstInput() {
+    								var firstinput = document.getElementById("firstinput");
+    								firstinput.addEventListener('focus', function() {
+    									document.getElementById("main-content-form").addEventListener('submit', interceptSubmit, false);
+    								}, false);
+    								firstinput.addEventListener('blur', function() {
+    									document.getElementById("main-content-form").removeEventListener('submit', interceptSubmit, false);
+    								}, false);
+    								firstinput.disabled = false;
+    								document.getElementById("filterBtn").disabled = false;
+    								firstinput.focus();
     							}
     							window.onload = rewriteURLToAvoidDuplicateUpdate;
 							</script>
-							<@macros.form>
+							<@macros.form id="main-content-form">
 								<input name="unit" type="hidden" value="${unit.id}" />
 								<input name="unittype" type="hidden" value="${unittype}" />
 								<table width="100%" cellspacing="0" cellpadding="0">
@@ -229,7 +249,8 @@
 
 										<tr>
 											<td>
-												<input name="filterstring" id="firstinput" type="text" onkeyup="TABLETREE.filterParameters()" size="30" value="${string}" tabindex="1" class="tiptip" title="Filter parameter names. Regular expression are allowed" />
+												<input name="filterstring" id="firstinput" disabled type="text" size="30" value="${string}" tabindex="1" class="tiptip" title="Filter parameter names. Regular expression are allowed" />
+												<button name="filterParamButton" id="filterBtn" disabled type="button" value="Filter" onclick="TABLETREE.filterParameters();">Filter</button>		
 											</td>
 											<td style="width: 1px; white-space: nowrap;" colspan="2">
 												<select name="filterflag" size="1" onchange="TABLETREE.filterParameters();" tabindex="2">
@@ -257,7 +278,7 @@
 										<#list params as param>
 											<#assign tabindex = tabindex + 1>
 											<#if param.unittypeParameter??>
-												<tr id="${param.name}">
+												<tr id="${param.name}" style="display: none;">
 													<#if param.unitParameter?? || param.profileParameter?? || param.unitSessionParameter??>
 														<td class="configured">
 													<#else>
@@ -363,7 +384,7 @@
 													</#if>					
 												</tr>
 											<#else>
-												<tr id="${param.name}">
+												<tr id="${param.name}" style="display: none;">
 													<td>
 														<span style="margin-left:${param.tab-4}px"><img src="images/minus.gif" alt="minus" onclick="TABLETREE.collapse('${param.name}')"/>${param.shortName}</span>
 													</td>
