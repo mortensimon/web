@@ -92,7 +92,8 @@ xAPS.createModule("unit.inspection",function($this,$super,$){
 });
 
 /**
- * Adding functionality check if the page needs to be reloaded before form submission
+ * Adds functionality to update the parameter filter with enter 
+ * without submitting the form.
  */
 $(function() {
 	$("#firstinput").focus(function() {
@@ -100,8 +101,8 @@ $(function() {
 			TABLETREE.filterParameters();
 			return false;
 		});
-	});
-	$("#firstinput").blur(function() {
+	}).blur(function() {
 		$("#main-content-form").unbind('submit.filter');
-	});
+	}).removeAttr('disabled')
+	.focus();
 });

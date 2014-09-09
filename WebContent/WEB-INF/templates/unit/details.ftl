@@ -7,7 +7,6 @@
 								});
 								function rewriteURLToAvoidDuplicateUpdate() {
         							history.replaceState({},'Dummy','?page=unit-configuration&init_refreshpage=Refresh');
-        							document.getElementById('firstinput').focus();
     							}
     							window.onload = rewriteURLToAvoidDuplicateUpdate;
 							</script>
@@ -229,7 +228,7 @@
 
 										<tr>
 											<td>
-												<input name="filterstring" id="firstinput" type="text" size="30" value="${string}" tabindex="1" class="tiptip" title="Filter parameter names. Regular expression are allowed" />
+												<input name="filterstring" id="firstinput" disabled type="text" size="30" value="${string}" tabindex="1" class="tiptip" title="Filter parameter names. Regular expression are allowed" />
 												<button type="button" value="Filter" onclick="TABLETREE.filterParameters();" name="filterParamButton">Filter</button>		
 											</td>
 											<td style="width: 1px; white-space: nowrap;" colspan="2">
