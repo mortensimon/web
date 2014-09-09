@@ -105,4 +105,5 @@ $(function() {
 		$("#main-content-form").unbind('submit.filter');
 	}).removeAttr('disabled')
 	.focus();
+	$("#filterBtn").removeAttr('disabled');
 });
