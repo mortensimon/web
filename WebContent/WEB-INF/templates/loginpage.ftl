@@ -22,7 +22,7 @@
 	<body>
 		<center>
 			<div class="center_box" id="bodylogon">
-				<form action="login" id="loginForm" method="post" class="unit">
+				<form action="/web/login" id="loginForm" method="post" class="unit">
 					<fieldset id="logondiv">
 						<legend>Fusion Login</legend>
 						<table>
