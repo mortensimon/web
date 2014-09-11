@@ -43,7 +43,7 @@
 													<table style="height:160px" id="unit_config">
 														<tr>
 															<th style="text-align:right;white-space:nowrap;">Profile:</th>
-															<td><@macros.dropdown list=profiles /></td>
+															<td><@macros.dropdown list=profiles onchange="" /></td>
 															<td><input name="unitmove" value="Move to profile" type="submit" class="tiptip" title="Immediately move unit to another profile, only unit parameter settings will be kept. Next provisioning may lead to changes in the device, since new profile parameters are applied." /></td>
 														</tr>
 														<tr>
