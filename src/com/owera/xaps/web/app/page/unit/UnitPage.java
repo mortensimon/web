@@ -48,6 +48,7 @@ import com.owera.xaps.web.app.util.SessionCache;
 import com.owera.xaps.web.app.util.SessionData;
 import com.owera.xaps.web.app.util.TimeFormatter;
 import com.owera.xaps.web.app.util.WebConstants;
+import com.owera.xaps.web.app.util.WebProperties;
 import com.owera.xaps.web.app.util.XAPSLoader;
 
 /**
@@ -638,6 +639,7 @@ public class UnitPage extends AbstractWebPage {
 		root.put("nextconnecttimestamp", nextConnectTms);
 		root.put("nextconnectdiff", nextConnectDiff);
 		root.put("lateconnect", lateConnect);
+		root.put("autofilter", WebProperties.getWebProperties().getBoolean("unit.config.autofilter", new Boolean(false)));
 		String selectedFlag = inputData.getFilterFlag().getString() != null ? inputData.getFilterFlag().getString() : "All";
 		DropDownSingleSelect<String> flags = InputSelectionFactory.getDropDownSingleSelect(inputData.getFilterFlag(), selectedFlag, UnittypeParameterFlags.toList());
 		root.put("flags", flags);
