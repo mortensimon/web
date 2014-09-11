@@ -249,7 +249,7 @@
 
 										<tr>
 											<td>
-												<input name="filterstring" id="firstinput" disabled type="text" size="30" value="${string}" tabindex="1" class="tiptip" title="Filter parameter names. Regular expression are allowed" />
+												<input name="filterstring" id="firstinput" <#if autofilter>onkeypress="filterParameters();"</#if> disabled type="text" size="30" value="${string}" tabindex="1" class="tiptip" title="Filter parameter names. Regular expression are allowed" />
 												<button name="filterParamButton" id="filterBtn" disabled type="button" value="Filter" onclick="TABLETREE.filterParameters();">Filter</button>		
 											</td>
 											<td style="width: 1px; white-space: nowrap;" colspan="2">
