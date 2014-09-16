@@ -36,22 +36,6 @@
 		<url-pattern>/app/*</url-pattern>
 	</servlet-mapping>
 	
-	<!-- This enables Spring Web Flow to load the configuration in flows.xml -->
-	<!--   servlet>
-		<servlet-name>flows</servlet-name>
-		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-		<init-param>
-			<param-name>contextConfigLocation</param-name>
-			<param-value>
-				/WEB-INF/flows.xml
-			</param-value>
-		</init-param>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>flows</servlet-name>
-		<url-pattern>*.wizard</url-pattern>
-	</servlet-mapping -->
-	
 	<servlet>
 		<servlet-name>Monitor Servlet</servlet-name>
 		<servlet-class>com.owera.xaps.web.app.Monitor</servlet-class>

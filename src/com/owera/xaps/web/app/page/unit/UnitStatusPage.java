@@ -141,11 +141,6 @@ public class UnitStatusPage extends AbstractWebPage {
 		List<MenuItem> list = new ArrayList<MenuItem>();
 		list.addAll(super.getShortcutItems(sessionData));
 		if(currentUnit!=null){
-			list.add(new MenuItem("Configure VoIP line", Page.UNIT_SETUP_WIZARD)
-				.addParameter("unittype", currentUnit.getUnittype().getName())
-				.addParameter("profile", currentUnit.getProfile().getName())
-				.addParameter("unit", currentUnit.getId())
-			);
 			list.add(new MenuItem("Last 100 syslog entries", Page.SYSLOG)
 				.addCommand("auto") // automatically hit the Search button
 				.addParameter("unittype", currentUnit.getUnittype().getName())

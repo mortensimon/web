@@ -101,7 +101,6 @@ public class ContextItem {
 		/* Unit pages */
 		case UNIT:
 		case UNITSTATUS:
-		case UNIT_SETUP_WIZARD:
 		case WINDOWUNIT:
 			unitId = inputData.getUnit().getString();
 			profileName = inputData.getProfile().getString();
