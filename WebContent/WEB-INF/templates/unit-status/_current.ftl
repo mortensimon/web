@@ -161,13 +161,15 @@
 		<fieldset>
 		<legend>History from <span style="font-weight:bold;">${startSimple}</span> to <span style="font-weight:bold;">${endSimple}</span></legend>
 		<table style="width:100%"><tbody>
-			<tr>
-				<th align="left" title="This gives an hint to the average call quality of both VoIP lines." class="tiptip">VoIP quality:</th>
-				<td>
-					<div id="unitTotalScore"><img src="images/spinner.gif" alt="wait" /></div>
-				</td>
-				<td id="unitTotalScoreEffect" style="display:none;padding-left:10px;padding-right:10px;color:red" align="right"></td>
-			</tr>
+			<#if showVoip>
+				<tr>
+					<th align="left" title="This gives an hint to the average call quality of both VoIP lines." class="tiptip">VoIP quality:</th>
+					<td>
+						<div id="unitTotalScore"><img src="images/spinner.gif" alt="wait" /></div>
+					</td>
+					<td id="unitTotalScoreEffect" style="display:none;padding-left:10px;padding-right:10px;color:red" align="right"></td>
+				</tr>
+			</#if>
 			<tr>
 				<th align="left" width="150px;">Syslog status:</th>
 				<td>
@@ -183,21 +185,23 @@
 				</td>
 				</#if>
 			</tr>
-			<tr>
-				<th align="left">Hardware status:</th>
-				<td>
+			<#if showHardware>
+				<tr>
+					<th align="left">Hardware status:</th>
+					<td>
+						<#if (info.overallStatus.hardwareEffect>0)>
+						<font color="red">Errors have been logged</font>
+						<#else>
+						${NO_ERRORS_LOGGED}
+						</#if>
+					</td>
 					<#if (info.overallStatus.hardwareEffect>0)>
-					<font color="red">Errors have been logged</font>
-					<#else>
-					${NO_ERRORS_LOGGED}
+					<td style="padding-left:10px;padding-right:10px;color:red" align="right">
+						( -${info.overallStatus.hardwareEffect?string("0.0")} )
+					</td>
 					</#if>
-				</td>
-				<#if (info.overallStatus.hardwareEffect>0)>
-				<td style="padding-left:10px;padding-right:10px;color:red" align="right">
-					( -${info.overallStatus.hardwareEffect?string("0.0")} )
-				</td>
-				</#if>
-			</tr>
+				</tr>
+			</#if>
 			<tr>
 				<td colspan="3" align="right">&nbsp;</td>
 			</tr>
@@ -217,6 +221,8 @@
        start: '${start}',
        end: '${end}',
        unitId: '${info.unit.id}',
-       pageId: '${URL_MAP.UNITSTATUS.id}'
+       pageId: '${URL_MAP.UNITSTATUS.id}',
+       showHardware: ${showHardware?string},
+       showVoip: ${showVoip?string}
     });
 </script>

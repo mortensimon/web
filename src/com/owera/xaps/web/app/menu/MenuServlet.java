@@ -288,16 +288,25 @@ public class MenuServlet extends HttpServlet {
 			MenuItem syslogReport = new MenuItem("Syslog", Page.REPORT.getUrl("type=" + ReportType.SYS.getName()));
 			fusionReports.addSubMenuItem(syslogReport);
 			syslogReport.addSubMenuItem(new MenuItem("Units", Page.UNITLIST.getUrl("type=" + ReportType.SYS.getName()), new ArrayList<MenuItem>()));
-
-			MenuItem syslogReports = new MenuItem("Pingcom Devices", Page.REPORT);
-			MenuItem voipReport = new MenuItem("Voip", Page.REPORT.getUrl("type=" + ReportType.VOIP.getName()));
-			syslogReports.addSubMenuItem(voipReport);
-			voipReport.addSubMenuItem(new MenuItem("Units", Page.UNITLIST.getUrl("type=" + ReportType.VOIP.getName()), new ArrayList<MenuItem>()));
-			MenuItem hardwareReport = new MenuItem("Hardware", Page.REPORT.getUrl("type=" + ReportType.HARDWARE.getName()));
-			syslogReports.addSubMenuItem(hardwareReport);
-			hardwareReport.addSubMenuItem(new MenuItem("Units", Page.UNITLIST.getUrl("type=" + ReportType.HARDWARE.getName()), new ArrayList<MenuItem>()));
-			syslogReports.setDisableOnClickWithJavaScript();
-			reporting.addSubMenuItem(syslogReports);
+			
+			// If both hardware and voip are to be hidden this menu item is redundant.
+			boolean showHardware = WebProperties.getWebProperties().getShowHardware();
+			boolean showVoip =  WebProperties.getWebProperties().getShowVoip();
+			if (showHardware || showVoip) {
+				MenuItem syslogReports = new MenuItem("Pingcom Devices", Page.REPORT);
+				if (showVoip) {
+					MenuItem voipReport = new MenuItem("Voip", Page.REPORT.getUrl("type=" + ReportType.VOIP.getName()));
+					syslogReports.addSubMenuItem(voipReport);
+					voipReport.addSubMenuItem(new MenuItem("Units", Page.UNITLIST.getUrl("type=" + ReportType.VOIP.getName()), new ArrayList<MenuItem>()));
+				}
+				if (showHardware) {
+					MenuItem hardwareReport = new MenuItem("Hardware", Page.REPORT.getUrl("type=" + ReportType.HARDWARE.getName()));
+					syslogReports.addSubMenuItem(hardwareReport);
+					hardwareReport.addSubMenuItem(new MenuItem("Units", Page.UNITLIST.getUrl("type=" + ReportType.HARDWARE.getName()), new ArrayList<MenuItem>()));
+				}
+				syslogReports.setDisableOnClickWithJavaScript();
+				reporting.addSubMenuItem(syslogReports);
+			}
 
 			//			MenuItem trReports = new MenuItem("TR069 Devices", Page.REPORT);
 			//			reporting.addSubMenuItem(trReports);

@@ -88,6 +88,7 @@ import com.owera.xaps.web.app.util.DecimalUtils;
 import com.owera.xaps.web.app.util.SessionCache;
 import com.owera.xaps.web.app.util.SessionData;
 import com.owera.xaps.web.app.util.WebConstants;
+import com.owera.xaps.web.app.util.WebProperties;
 import com.owera.xaps.web.app.util.XAPSLoader;
 
 import freemarker.template.TemplateMethodModel;
@@ -244,6 +245,9 @@ public class UnitStatusPage extends AbstractWebPage {
 		boolean currentEnabled = params.getBoolean("current",true);
 		templateMap.put("currentEnabled",currentEnabled);
 		boolean historyEnabled = params.getBoolean("history");
+		
+		templateMap.put("showVoip", WebProperties.getWebProperties().getShowVoip());
+		templateMap.put("showHardware", WebProperties.getWebProperties().getShowHardware());
 		
 		//If this is the history view, we add the required objects to the template map
 		if(historyEnabled){
