@@ -20,7 +20,9 @@ xAPS.createModule("unit.dashboard", function($this, $super, $) {
     $this.settings = {
         continueToUpdateLineStatus : true, // the continuous updateLineStatus process can be interrupted by changing this to false
         pageId: null, // REQUIRED
-        unitId: null // REQUIRED
+        unitId: null, // REQUIRED
+        showHardware: null,
+        showVoip: null
     };
     
     /**
@@ -33,7 +35,8 @@ xAPS.createModule("unit.dashboard", function($this, $super, $) {
     	window.stop();
     	$this.settings.continueToUpdateLineStatus = false;
     	$this['lineUpdateCheck'].abort();
-    	$this.getTotalScoreNumber.abort();
+    	if ($this.getTotalScoreNumber)
+    		$this.getTotalScoreNumber.abort();
     	if($this.getTotalScoreEfect)
     		$this.getTotalScoreEffect.abort();
     	$("#overallstatus-speedometer").attr("src","");
@@ -107,23 +110,26 @@ xAPS.createModule("unit.dashboard", function($this, $super, $) {
     	}else if($this.settings.unitId==null){
     		alert("The Unit Dashboard has not been configured properly. Missing the unitId configuration setting.");
     	}else{
-	    	$this.getTotalScoreNumber = $.ajax({
-	            async: true,
-	            url : "app/"+$this.settings.pageId+"/totalscore-number?unitId="+$this.settings.unitId+"&start="+$this.settings.start+"&end="+$this.settings.end,
-	            success : function(data) {
-	                $('#unitTotalScore').html(data);
-	                $this.getTotalScoreEffect = $.ajax({
-	                    async: true,
-	                    url : "app/"+$this.settings.pageId+"/totalscore-effect?unitId="+$this.settings.unitId+"&start="+$this.settings.start+"&end="+$this.settings.end,
-	                    dataType : 'json',
-	                    success : function(data) {
-	                        if (data && data.score && data.color) {
-	                            $('#unitTotalScoreEffect').show().html("( -<span style='color:" + data.color + "';>" + data.score + "</span> )");
-	                        }
-	                    }
-	                });
-	            }
-	        });
+	    	if($this.settings.showVoip) {
+	    		console.log("yes");
+	    		$this.getTotalScoreNumber = $.ajax({
+		            async: true,
+		            url : "app/"+$this.settings.pageId+"/totalscore-number?unitId="+$this.settings.unitId+"&start="+$this.settings.start+"&end="+$this.settings.end,
+		            success : function(data) {
+		                $('#unitTotalScore').html(data);
+		                $this.getTotalScoreEffect = $.ajax({
+		                    async: true,
+		                    url : "app/"+$this.settings.pageId+"/totalscore-effect?unitId="+$this.settings.unitId+"&start="+$this.settings.start+"&end="+$this.settings.end,
+		                    dataType : 'json',
+		                    success : function(data) {
+		                        if (data && data.score && data.color) {
+		                            $('#unitTotalScoreEffect').show().html("( -<span style='color:" + data.color + "';>" + data.score + "</span> )");
+		                        }
+		                    }
+		                });
+		            }
+		        });
+	    	}
 	
 	        $("#overallstatus-speedometer").attr("src", "app/"+$this.settings.pageId+"/overallstatus?unitId="+$this.settings.unitId+"&start="+$this.settings.start+"&end="+$this.settings.end);
 	

@@ -21,7 +21,9 @@ xAPS.createModule("unit.history",function($this,$super,$){
     $this.settings = {
     	pageId: null, // REQUIRED
     	unitId: null, // REQUIRED
-    	selectedTab: null
+    	selectedTab: null,
+    	showHardware: null,
+    	showVoip: null
     };
 
     /**
@@ -43,19 +45,21 @@ xAPS.createModule("unit.history",function($this,$super,$){
 	    	   select: function(event, ui) {
 	               if($this.activeCall)
 	            	   $this.activeCall.abort();
-	    		   if(ui.index==0)
+	    		   if (ui.panel.id === 'voipDiv')
 	    			   $("#VoipButton").click();
-	    		   else if(ui.index==1)
+	    		   else if (ui.panel.id === 'hardwareDiv')
 	    			   $("#HardwareButton").click();
-	    		   else if(ui.index==2)
+	    		   else if (ui.panel.id === 'syslogDiv')
 	    			   $("#SyslogButton").click();
 	    	   }
 	        });
 	        if($this.settings.selectedTab){
 	            $("#tabs").tabs("select",$this.settings.selectedTab);
 	        }
-	        $this.initVoipTab();
-	        $this.initHardwareTab();
+	        if ($this.settings.showVoip)
+	        	$this.initVoipTab();
+	        if ($this.settings.showHardware)
+	        	$this.initHardwareTab();
 	        $this.initSyslogTab();
     	}
     };
