@@ -43,7 +43,6 @@ import com.owera.xaps.web.app.page.trigger.TriggerReleaseHistoryPage;
 import com.owera.xaps.web.app.page.trigger.TriggerReleasePage;
 import com.owera.xaps.web.app.page.unit.InspectionPage;
 import com.owera.xaps.web.app.page.unit.UnitPage;
-import com.owera.xaps.web.app.page.unit.UnitSetupWizardPage;
 import com.owera.xaps.web.app.page.unit.UnitStatusPage;
 import com.owera.xaps.web.app.page.unit.UnitStatusRealTimeMosPage;
 import com.owera.xaps.web.app.page.unittype.GetUnitTypeParameterFlagAndValuesPage;
@@ -88,10 +87,9 @@ public enum Page {
 	WINDOWPROFILE("profilewindow", WindowPage.class),
 
 	/* Unit pages */
-	UNIT("unit-configuration", UnitPage.class, "icon_unit.png"), //
-	UNITSTATUS("unit-dashboard", UnitStatusPage.class, "icon_unit.png"), //
-	WINDOWUNIT("unitwindow", WindowPage.class), //
-	UNIT_SETUP_WIZARD("unit-setup-wizard", UnitSetupWizardPage.class),
+	UNIT("unit-configuration", UnitPage.class, "icon_unit.png"),
+	UNITSTATUS("unit-dashboard", UnitStatusPage.class, "icon_unit.png"),
+	WINDOWUNIT("unitwindow", WindowPage.class),
 
 	/* Group detail page */
 	GROUP("group", GroupPage.class, "icon_group.png"),
@@ -331,7 +329,6 @@ public enum Page {
 
 		case WINDOWUNIT:
 		case UNITSTATUS:
-		case UNIT_SETUP_WIZARD:
 			return UNIT.getId();
 
 		case GROUPSOVERVIEW:
@@ -363,7 +360,6 @@ public enum Page {
 
 		case WINDOWUNIT:
 		case UNITSTATUS:
-		case UNIT_SETUP_WIZARD:
 			return UNIT.getId();
 
 		case GROUPSOVERVIEW:
@@ -477,7 +473,6 @@ public enum Page {
 			list.add(INSPECTION);
 			list.add(UNITSTATUS);
 			list.add(WINDOWUNIT);
-			list.add(UNIT_SETUP_WIZARD);
 			list.add(TOPMENU_WIZARDS);
 			list.add(TOPMENU_EASY);
 			list.add(TOPMENU_FILESCRIPT);
@@ -495,7 +490,6 @@ public enum Page {
 			list.add(INSPECTION);
 			list.add(UNITSTATUS);
 			list.add(WINDOWUNIT);
-			list.add(UNIT_SETUP_WIZARD);
 			list.add(TOPMENU_WIZARDS);
 		}
 		else if (list.contains(DASHBOARD_SUPPORT)) {
@@ -506,7 +500,6 @@ public enum Page {
 			list.add(INSPECTION);
 			list.add(UNITSTATUS);
 			list.add(WINDOWUNIT);
-			list.add(UNIT_SETUP_WIZARD);
 			list.add(UPGRADE);
 			list.add(TOPMENU_WIZARDS);
 		}

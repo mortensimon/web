@@ -67,12 +67,12 @@ public class MonitorPage extends AbstractWebPage {
 		String url = null;
 		if (cmd != null) {
 			if (cmd.equalsIgnoreCase("status") || cmd.equalsIgnoreCase("monitor"))
-				url = baseURL + "xapsmonitor/web?page=status&html=no";
+				url = baseURL + "monitor/web?page=status&html=no";
 			else if (cmd.equalsIgnoreCase("history"))
-				url = baseURL + "xapsmonitor/web?page=history&html=no";
+				url = baseURL + "monitor/web?page=history&html=no";
 		} else{
 			cmd = "";
-			url = baseURL + "xapsmonitor/web?html=no";
+			url = baseURL + "monitor/web?html=no";
 		}
 		
 		if(url.startsWith("https://")){
