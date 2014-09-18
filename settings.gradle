@@ -1,0 +1,9 @@
+rootProject.name = "freeacs-web"
+include "freeacs-dbi"
+include "freeacs-common"
+include "freeacs-wstc"
+project(":freeacs-dbi").projectDir = file("../dbi")
+project(":freeacs-wstc").projectDir = file("../wstc")
+project(":freeacs-common").projectDir = file("../common")
+
+
