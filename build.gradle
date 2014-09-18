@@ -30,4 +30,10 @@ httpPort = 8080
 stopPort = 9451
 stopKey = 'foo'
 
+jettyRun.contextPath = 'xaps'
 jettyRunWar.contextPath = 'xaps'
+
+jettyRun {
+    reload = "automatic"
+    scanIntervalSeconds = 1
+}
