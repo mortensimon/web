@@ -111,7 +111,6 @@ xAPS.createModule("unit.dashboard", function($this, $super, $) {
     		alert("The Unit Dashboard has not been configured properly. Missing the unitId configuration setting.");
     	}else{
 	    	if($this.settings.showVoip) {
-	    		console.log("yes");
 	    		$this.getTotalScoreNumber = $.ajax({
 		            async: true,
 		            url : "app/"+$this.settings.pageId+"/totalscore-number?unitId="+$this.settings.unitId+"&start="+$this.settings.start+"&end="+$this.settings.end,
