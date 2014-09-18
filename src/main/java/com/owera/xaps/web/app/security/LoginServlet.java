@@ -486,7 +486,7 @@ public class LoginServlet extends HttpServlet implements Filter {
 	 */
 	public void init(FilterConfig filterConfig) throws ServletException {
 		String contextPath = "";// filterConfig.getServletContext().getContextPath();
-		if (contextPath.equals("/xapsweb")) {
+		if (contextPath.equals("/xaps")) {
 			contextPath = "";
 		} else if (contextPath.trim().length() > 1) {
 			contextPath = "-" + contextPath.substring(1);

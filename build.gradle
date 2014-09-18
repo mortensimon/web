@@ -30,4 +30,4 @@ httpPort = 8080
 stopPort = 9451
 stopKey = 'foo'
 
-jettyRunWar.contextPath = 'web'
+jettyRunWar.contextPath = 'xaps'
