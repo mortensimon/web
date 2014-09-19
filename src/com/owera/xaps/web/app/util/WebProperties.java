@@ -225,4 +225,20 @@ public class WebProperties {
 	public String getLoginAuth() {
 		return getString("login.auth", "none");
 	}
+	
+	/**
+	 * Returns an indicator for if hardware syslog should be available
+	 * @return
+	 */
+	public Boolean getShowHardware() {
+		return getBoolean("unit.dash.hardware", false);
+	}
+	
+	/**
+	 * Returns an indicator for if voip syslog should be available
+	 * @return
+	 */
+	public Boolean getShowVoip() {
+		return getBoolean("unit.dash.voip", false);
+	}
 }
