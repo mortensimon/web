@@ -69,7 +69,7 @@
 														<tr>
 															<th style="text-align:right;white-space:nowrap;">Unit Id:</th>
 															<td>${unit.id}</td>
-															<td><input name="unitdelete" value="Delete" type="submit" onclick="return processDelete('delete the unit');" class="tiptip" title="The unit will be deleted from Fusion, all unit parameter settings will be lost. The device may continue to connect to Fusion and may be recovered through Discovery or manual creation of Unit in Fusion" /></td>
+															<td><input name="unitdelete" value="Delete" type="submit" onclick="return processDelete('delete the unit');" class="tiptip" title="The unit will be deleted from the system, all unit parameter settings will be lost. The device may continue to connect to the system and may be recovered through Discovery or manual creation of Unit in the system" /></td>
 														</tr>
 														<tr>
 															<th style="text-align:right;white-space:nowrap;" class="tiptip" title="Link to Web GUI of device. You may specify the System.X_OWERA-COM.Device.GUIURL as a profile/unit parameter to change/set this URL. Reference other parameters to build the URL by using ${r'${parameter-name}'}">Device GUI:</th>

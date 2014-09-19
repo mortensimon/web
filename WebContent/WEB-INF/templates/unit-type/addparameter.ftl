@@ -30,7 +30,7 @@
 												<th align="right" style="width:10%;">&nbsp;</th>
 												<td>
 													<table cellspacing="0" cellpadding="0">
-														<tr id="alwaysread" <#if !param?? || (param?? && param.flag.readOnly=false)>style="display:none"</#if> class="tiptip" title="The 'Always Read' flag guarantees that Fusion will always read this parameter from the device and store it. This is useful for some parameters of particular importance like UDPConnectionRequestAddress or ConnectionRequestURL.">
+														<tr id="alwaysread" <#if !param?? || (param?? && param.flag.readOnly=false)>style="display:none"</#if> class="tiptip" title="The 'Always Read' flag guarantees that the system will always read this parameter from the device and store it. This is useful for some parameters of particular importance like UDPConnectionRequestAddress or ConnectionRequestURL.">
 															<td align="left">Always-Read (A):</td>
 															<td><input onchange="buildFlags(this)" <#if param?? && param.flag.alwaysRead=true>checked="checked"</#if> type="checkbox" name="param:always" value="A" /></td>
 														</tr>
@@ -42,7 +42,7 @@
 															<td align="left">Boot-Required (B):</td>
 															<td><input onchange="buildFlags(this)" <#if param?? && param.flag.bootRequired=true>checked="checked"</#if> type="checkbox" name="param:bootrequired" value="B" /></td>
 														</tr>
-														<tr name="flag-attributes" <#if !param??>style="display:none"</#if> title="Set the 'Confidential' flag for parameters that the unit considers confidential. In TR-069 provisioning, passwords are not allowed to be read from the device, which can cause Fusion to re-transmit the password on every provisioning. Setting this flag will avoid this.">
+														<tr name="flag-attributes" <#if !param??>style="display:none"</#if> title="Set the 'Confidential' flag for parameters that the unit considers confidential. In TR-069 provisioning, passwords are not allowed to be read from the device, which can cause the system to re-transmit the password on every provisioning. Setting this flag will avoid this.">
 															<td align="left">Confidential (C):</td>
 															<td><input onchange="buildFlags(this)" <#if param?? && param.flag.confidential=true>checked="checked"</#if> type="checkbox" name="param:confidential" value="C" /></td>
 														</tr>

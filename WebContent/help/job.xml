@@ -72,10 +72,10 @@
 				
 				RESTART - Perform a Reboot on the CPE.&lt;p&gt; 
 				
-				SHELL - Executes a Fusion Shell script upon provisioning of CPE. The script will not
-				run before the state of the CPE is loaded into the Fusion database. When the script
+				SHELL - Executes a FreeACS Shell script upon provisioning of CPE. The script will not
+				run before the state of the CPE is loaded into the internal database. When the script
 				is finished, the server returns to the CPE with whatever new settings set in the script.
-				The script will run with the same permissions as the user uploading it to Fusion.
+				The script will run with the same permissions as the user uploading it to the system.
 				&lt;p&gt;
 				
 				SOFTWARE - The CPE will download this software and try to upgrade. 
@@ -112,7 +112,7 @@
             </Heading>
 			<Help>
 				The Group on which the job will be executed. Remember that the Units within a Group
-				changes (or may change), so it's not possible for Fusion to tell when a job is
+				changes (or may change), so it's not possible for the system to tell when a job is
 				completed.
             </Help>
 		</Field>

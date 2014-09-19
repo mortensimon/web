@@ -232,6 +232,7 @@ public class MenuServlet extends HttpServlet {
 			if (allowedPages.contains(Page.SYSLOG))
 				support.addSubMenuItem(new MenuItem("Syslog", Page.SYSLOG));
 			support.addSubMenuItem(new MenuItem("Fusion-support","mailto:support@pingcom.net?subject=Suggestions,%20improvements%20or%20bugs%20in%20Fusion&body=To%20Fusion%20Support"));
+      support.addSubMenuItem(new MenuItem("FreeACS-support","http://freeacs.freeforums.org/"));
 			menu.add(support);
 		}
 		if (allowedPages.contains(Page.TOPMENU_EASY)) {
@@ -279,7 +280,7 @@ public class MenuServlet extends HttpServlet {
 
 		if (allowedPages.contains(Page.TOPMENU_REPORT)) {
 			MenuItem reporting = new MenuItem("Reports", Page.TOPMENU_REPORT).setSelected(selectedPage.equalsAny(Page.REPORT)).setDisableOnClickWithJavaScript();
-			MenuItem fusionReports = new MenuItem("Fusion", Page.REPORT).setDisableOnClickWithJavaScript();
+			MenuItem fusionReports = new MenuItem("FreeACS", Page.REPORT).setDisableOnClickWithJavaScript();
 			reporting.addSubMenuItem(fusionReports);
 			fusionReports.addSubMenuItem(new MenuItem("Unit", Page.REPORT).addParameter("type", ReportType.UNIT.getName()));
 			fusionReports.addSubMenuItem(new MenuItem("Group", Page.REPORT).addParameter("type", ReportType.GROUP.getName()));

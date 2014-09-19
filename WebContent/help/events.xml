@@ -71,7 +71,7 @@
             </Heading>
 			<Help>
 				A Shell script to run upon the occurrence of the Syslog Event. 
-				The script must be uploaded to the file storage of Fusion and will run with the access rights
+				The script must be uploaded to the file storage of the system and will run with the access rights
 				of the person uploading the script. The context in which the script will run, will be that of
 				the Unit sending the syslog message (if possible). It is also possible to pass along
 				variables to the script, specified as a comma-separated list of strings.&lt;p&gt;

@@ -230,9 +230,9 @@
 				System parameter: SoftwareURL
             </Heading>
 			<Help>
-				This parameter can be used to specify an optional URL for firmware download. By default Fusion will handle a 
-				download without usage of this parameter, but if you want to download from some other location than Fusion, 
-				or if the device doens't handle the auto-generated URL from Fusion, then this parameter can be set in 
+				This parameter can be used to specify an optional URL for firmware download. By default the system will handle a 
+				download without usage of this parameter, but if you want to download from some other location than the system, 
+				or if the device doens't handle the auto-generated URL from the system, then this parameter can be set in 
 				conjunction with DesiredSoftwareVersion. 
 			</Help>	
 		</Parameter>		

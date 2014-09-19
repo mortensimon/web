@@ -16,10 +16,10 @@ be all the devices which have the SIP-"Enabled"-parameter set to "1".<p>
 Specify a number of hours as timeout. If no message matching the expression if found within the last timeout-hours, then
 the Heartbeat is deemed missing.
 <h2>Result</h2>
-The result of this is that Fusion will generate a HEARTBEAT-MISSING message for every Unit where the Heartbeat has stopped. 
-All the messages will contain "HEARTBEAT-MISSING" and the expression used. Fusion will insert this message every hour 
+The result of this is that the server will generate a HEARTBEAT-MISSING message for every Unit where the Heartbeat has stopped. 
+All the messages will contain "HEARTBEAT-MISSING" and the expression used. The system will insert this message every hour 
 for as long as the service is dead.
 <h2>What to do with it?</h2>
-Now that Fusion produces messages of this kind, you can setup a Syslog Event to trap this Missing Heartbeat! Furthermore, a
+Now that the system produces messages of this kind, you can setup a Syslog Event to trap this Missing Heartbeat! Furthermore, a
 Syslog Event can be used in a Trigger, to generate an alarm. In effect, you can then get alarm, if some or many devices
 loose their services.
