@@ -5,6 +5,9 @@ apply plugin: 'eclipse-wtp'
 
 repositories {
     mavenCentral()
+    flatDir {
+        dirs 'libs'
+    }
 }
 
 dependencies {
@@ -20,9 +23,9 @@ dependencies {
     compile 'com.thoughtworks.xstream:xstream:1.4.7'
     compile 'net.sf.flexjson:flexjson:3.2'
     compile 'org.springframework:spring-context-support:3.2.2.RELEASE'
-    compile(project(":freeacs-wstc"))
-    compile(project(":freeacs-common"))
-    compile(project(":freeacs-dbi"))
+    compile name: 'xaps-ws'
+    compile(project(":common"))
+    compile(project(":dbi"))
     providedCompile 'javax.servlet:servlet-api:2.5'
 }
 
