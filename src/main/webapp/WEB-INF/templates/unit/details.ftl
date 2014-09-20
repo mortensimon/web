@@ -7,11 +7,31 @@
 								});
 								function rewriteURLToAvoidDuplicateUpdate() {
         							history.replaceState({},'Dummy','?page=unit-configuration&init_refreshpage=Refresh');
-        							document.getElementById('firstinput').focus();
+        							activateFirstInput();
+    							}
+    							function interceptSubmit(event) {
+    								if (!event)
+    									event = window.event;
+    								TABLETREE.filterParameters();
+    								event.preventDefault();
+    								event.stopPropagation();
+    								return false;
+    							}
+    							function activateFirstInput() {
+    								var firstinput = document.getElementById("firstinput");
+    								firstinput.addEventListener('focus', function() {
+    									document.getElementById("main-content-form").addEventListener('submit', interceptSubmit, false);
+    								}, false);
+    								firstinput.addEventListener('blur', function() {
+    									document.getElementById("main-content-form").removeEventListener('submit', interceptSubmit, false);
+    								}, false);
+    								firstinput.disabled = false;
+    								document.getElementById("filterBtn").disabled = false;
+    								firstinput.focus();
     							}
     							window.onload = rewriteURLToAvoidDuplicateUpdate;
 							</script>
-							<@macros.form>
+							<@macros.form id="main-content-form">
 								<input name="unit" type="hidden" value="${unit.id}" />
 								<input name="unittype" type="hidden" value="${unittype}" />
 								<table width="100%" cellspacing="0" cellpadding="0">
@@ -23,7 +43,7 @@
 													<table style="height:160px" id="unit_config">
 														<tr>
 															<th style="text-align:right;white-space:nowrap;">Profile:</th>
-															<td><@macros.dropdown list=profiles /></td>
+															<td><@macros.dropdown list=profiles onchange="" /></td>
 															<td><input name="unitmove" value="Move to profile" type="submit" class="tiptip" title="Immediately move unit to another profile, only unit parameter settings will be kept. Next provisioning may lead to changes in the device, since new profile parameters are applied." /></td>
 														</tr>
 														<tr>
@@ -49,7 +69,7 @@
 														<tr>
 															<th style="text-align:right;white-space:nowrap;">Unit Id:</th>
 															<td>${unit.id}</td>
-															<td><input name="unitdelete" value="Delete" type="submit" onclick="return processDelete('delete the unit');" class="tiptip" title="The unit will be deleted from Fusion, all unit parameter settings will be lost. The device may continue to connect to Fusion and may be recovered through Discovery or manual creation of Unit in Fusion" /></td>
+															<td><input name="unitdelete" value="Delete" type="submit" onclick="return processDelete('delete the unit');" class="tiptip" title="The unit will be deleted from the system, all unit parameter settings will be lost. The device may continue to connect to the system and may be recovered through Discovery or manual creation of Unit in the system" /></td>
 														</tr>
 														<tr>
 															<th style="text-align:right;white-space:nowrap;" class="tiptip" title="Link to Web GUI of device. You may specify the System.X_OWERA-COM.Device.GUIURL as a profile/unit parameter to change/set this URL. Reference other parameters to build the URL by using ${r'${parameter-name}'}">Device GUI:</th>
@@ -229,7 +249,10 @@
 
 										<tr>
 											<td>
-												<input name="filterstring" id="firstinput" type="text" onkeyup="TABLETREE.filterParameters()" size="30" value="${string}" tabindex="1" class="tiptip" title="Filter parameter names. Regular expression are allowed" />
+												<input name="filterstring" id="firstinput" <#if autofilter>onkeyup="TABLETREE.filterParameters();"</#if> disabled type="text" size="30" value="${string}" tabindex="1" class="tiptip" title="Filter parameter names. Regular expression are allowed" />
+												<#if !autofilter>
+													<button name="filterParamButton" id="filterBtn" disabled type="button" value="Filter" onclick="TABLETREE.filterParameters();">Filter</button>		
+												</#if>
 											</td>
 											<td style="width: 1px; white-space: nowrap;" colspan="2">
 												<select name="filterflag" size="1" onchange="TABLETREE.filterParameters();" tabindex="2">
@@ -257,7 +280,7 @@
 										<#list params as param>
 											<#assign tabindex = tabindex + 1>
 											<#if param.unittypeParameter??>
-												<tr id="${param.name}">
+												<tr id="${param.name}" style="display: none;">
 													<#if param.unitParameter?? || param.profileParameter?? || param.unitSessionParameter??>
 														<td class="configured">
 													<#else>
@@ -363,7 +386,7 @@
 													</#if>					
 												</tr>
 											<#else>
-												<tr id="${param.name}">
+												<tr id="${param.name}" style="display: none;">
 													<td>
 														<span style="margin-left:${param.tab-4}px"><img src="images/minus.gif" alt="minus" onclick="TABLETREE.collapse('${param.name}')"/>${param.shortName}</span>
 													</td>

@@ -232,6 +232,7 @@ public class MenuServlet extends HttpServlet {
 			if (allowedPages.contains(Page.SYSLOG))
 				support.addSubMenuItem(new MenuItem("Syslog", Page.SYSLOG));
 			support.addSubMenuItem(new MenuItem("Fusion-support","mailto:support@pingcom.net?subject=Suggestions,%20improvements%20or%20bugs%20in%20Fusion&body=To%20Fusion%20Support"));
+      support.addSubMenuItem(new MenuItem("FreeACS-support","http://freeacs.freeforums.org/"));
 			menu.add(support);
 		}
 		if (allowedPages.contains(Page.TOPMENU_EASY)) {
@@ -279,7 +280,7 @@ public class MenuServlet extends HttpServlet {
 
 		if (allowedPages.contains(Page.TOPMENU_REPORT)) {
 			MenuItem reporting = new MenuItem("Reports", Page.TOPMENU_REPORT).setSelected(selectedPage.equalsAny(Page.REPORT)).setDisableOnClickWithJavaScript();
-			MenuItem fusionReports = new MenuItem("Fusion", Page.REPORT).setDisableOnClickWithJavaScript();
+			MenuItem fusionReports = new MenuItem("FreeACS", Page.REPORT).setDisableOnClickWithJavaScript();
 			reporting.addSubMenuItem(fusionReports);
 			fusionReports.addSubMenuItem(new MenuItem("Unit", Page.REPORT).addParameter("type", ReportType.UNIT.getName()));
 			fusionReports.addSubMenuItem(new MenuItem("Group", Page.REPORT).addParameter("type", ReportType.GROUP.getName()));
@@ -288,16 +289,25 @@ public class MenuServlet extends HttpServlet {
 			MenuItem syslogReport = new MenuItem("Syslog", Page.REPORT.getUrl("type=" + ReportType.SYS.getName()));
 			fusionReports.addSubMenuItem(syslogReport);
 			syslogReport.addSubMenuItem(new MenuItem("Units", Page.UNITLIST.getUrl("type=" + ReportType.SYS.getName()), new ArrayList<MenuItem>()));
-
-			MenuItem syslogReports = new MenuItem("Pingcom Devices", Page.REPORT);
-			MenuItem voipReport = new MenuItem("Voip", Page.REPORT.getUrl("type=" + ReportType.VOIP.getName()));
-			syslogReports.addSubMenuItem(voipReport);
-			voipReport.addSubMenuItem(new MenuItem("Units", Page.UNITLIST.getUrl("type=" + ReportType.VOIP.getName()), new ArrayList<MenuItem>()));
-			MenuItem hardwareReport = new MenuItem("Hardware", Page.REPORT.getUrl("type=" + ReportType.HARDWARE.getName()));
-			syslogReports.addSubMenuItem(hardwareReport);
-			hardwareReport.addSubMenuItem(new MenuItem("Units", Page.UNITLIST.getUrl("type=" + ReportType.HARDWARE.getName()), new ArrayList<MenuItem>()));
-			syslogReports.setDisableOnClickWithJavaScript();
-			reporting.addSubMenuItem(syslogReports);
+			
+			// If both hardware and voip are to be hidden this menu item is redundant.
+			boolean showHardware = WebProperties.getWebProperties().getShowHardware();
+			boolean showVoip =  WebProperties.getWebProperties().getShowVoip();
+			if (showHardware || showVoip) {
+				MenuItem syslogReports = new MenuItem("Pingcom Devices", Page.REPORT);
+				if (showVoip) {
+					MenuItem voipReport = new MenuItem("Voip", Page.REPORT.getUrl("type=" + ReportType.VOIP.getName()));
+					syslogReports.addSubMenuItem(voipReport);
+					voipReport.addSubMenuItem(new MenuItem("Units", Page.UNITLIST.getUrl("type=" + ReportType.VOIP.getName()), new ArrayList<MenuItem>()));
+				}
+				if (showHardware) {
+					MenuItem hardwareReport = new MenuItem("Hardware", Page.REPORT.getUrl("type=" + ReportType.HARDWARE.getName()));
+					syslogReports.addSubMenuItem(hardwareReport);
+					hardwareReport.addSubMenuItem(new MenuItem("Units", Page.UNITLIST.getUrl("type=" + ReportType.HARDWARE.getName()), new ArrayList<MenuItem>()));
+				}
+				syslogReports.setDisableOnClickWithJavaScript();
+				reporting.addSubMenuItem(syslogReports);
+			}
 
 			//			MenuItem trReports = new MenuItem("TR069 Devices", Page.REPORT);
 			//			reporting.addSubMenuItem(trReports);
