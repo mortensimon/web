@@ -17,6 +17,12 @@ Jarfiles needed to make WAR file and run the project is part of the project
 (WebContent/WEB-INF/lib), but these may of course be exchanged for newer 
 versions (if necessary) upon making a WAR file. 
 
+Gradle
+------
+./gradlew war
+./gradlew eclipse
+./gradlew cleanEclipse
+./gradlew test
 
 Eclipse setup
 -------------
