@@ -1,1 +1,5 @@
 language: java
+git:
+  submodules: false
+before_install:
+  - git submodule update --init --recursive
