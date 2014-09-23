@@ -179,8 +179,8 @@ public class MenuServlet extends HttpServlet {
 			{
 				if (_pages.contains(Page.PERMISSIONS))
 					add(new MenuItem("Permissions", Page.PERMISSIONS).setSelected(currentPage.equals(Page.PERMISSIONS)));
-				if (_pages.contains(Page.CERTIFICATES))
-					add(new MenuItem("Certificates", Page.CERTIFICATES).setSelected(currentPage.equals(Page.CERTIFICATES)));
+//				if (_pages.contains(Page.CERTIFICATES))
+//				add(new MenuItem("Certificates", Page.CERTIFICATES).setSelected(currentPage.equals(Page.CERTIFICATES)));
 				if (_pages.contains(Page.MONITOR))
 					add(new MenuItem("Monitor", Page.MONITOR).setSelected(currentPage.equals(Page.MONITOR)));
 			}
