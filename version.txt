@@ -1,3 +1,5 @@
+v2.2.54 (2014-09-23)
+- ref: removed Certificate stuff - a report is locked up:), a menu item is removed
 v2.2.53 (2014-09-19)
 - ref: Fusion -> FreeACS (name change)
 - ref: Made Unit configuration page more responsive through use "Filter"-button (previously a bit sluggish when filtering was done on every keypress in the filter)
