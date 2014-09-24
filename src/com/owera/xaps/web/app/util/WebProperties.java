@@ -253,15 +253,20 @@ public class WebProperties {
 	 * @param unittypeName The unit type name to find settings for
 	 * @return List of CustomDashDisplayProperty containing the settings
 	 */
-	public List<CustomDashProperty> getCustomDash(String unittypeName) {
+	public Map<String, String> getCustomDash(String unittypeName) {
 		String regex = "^custom\\.dash\\.\\*.*";	
 		if (unittypeName != null && !unittypeName.isEmpty())
 			regex += "|^custom\\.dash\\." + unittypeName + ".*";
 		
-		List<CustomDashProperty> configDisplay = new LinkedList<CustomDashProperty>();
+		Map<String, String> configDisplay = new HashMap<String, String>();
 		
-		for (String key : getFilteredKeys(regex))
-			configDisplay.add(new CustomDashProperty(getProperty(key)));
+		for (String key : getFilteredKeys(regex)) {
+			String[] parts = getProperty(key).split("\\;");
+			if (parts.length > 1)
+				configDisplay.put(parts[0], parts[1]);
+			else
+				configDisplay.put(parts[0], null);
+		}
 		
 		return configDisplay;
 	}
@@ -283,50 +288,5 @@ public class WebProperties {
 				keys.add(key);
 		
 		return keys;
-	}
-	
-	/**
-	 * Class to hold a property for the custom dash display
-	 */
-	public class CustomDashProperty {
-		
-		private String id, name;
-
-		public CustomDashProperty(String id, String name) {
-			super();
-			this.id = id;
-			this.name = name;
-		}
-		
-		/**
-		 * Based on the way properties custom dash properties is expressed
-		 * in the web properties file the object is created from the raw
-		 * String representation of the property.
-		 * 
-		 * @param rawProperty
-		 */
-		public CustomDashProperty(String rawProperty) {
-			super();
-			String[] parts = rawProperty.split("\\;");
-			this.setId(parts[0].trim());
-			if (parts.length > 1)
-				this.setName(parts[1].trim());
-		}
-		
-		public String getId() {
-			return id;
-		}
-
-		public void setId(String id) {
-			this.id = id;
-		}
-
-		public String getName() {
-			return name;
-		}
-
-		public void setName(String name) {
-			this.name = name;
-		}
 	}
 }
