@@ -18,6 +18,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -89,6 +91,7 @@ import com.owera.xaps.web.app.util.SessionCache;
 import com.owera.xaps.web.app.util.SessionData;
 import com.owera.xaps.web.app.util.WebConstants;
 import com.owera.xaps.web.app.util.WebProperties;
+import com.owera.xaps.web.app.util.WebProperties.CustomDashProperty;
 import com.owera.xaps.web.app.util.XAPSLoader;
 
 import freemarker.template.TemplateMethodModel;
@@ -248,6 +251,20 @@ public class UnitStatusPage extends AbstractWebPage {
 		
 		templateMap.put("showVoip", WebProperties.getWebProperties().getShowVoip());
 		templateMap.put("showHardware", WebProperties.getWebProperties().getShowHardware());
+		
+		// Custom set properties that are to be displayed
+		String unittypeName = unit.getUnittype().getName();
+		Map<String, String> shortCutParams = new HashMap<String, String>();
+		for (CustomDashProperty property : WebProperties.getWebProperties().getCustomDash(unittypeName)) {
+			String value = currentUnit.getParameterValue(property.getId());
+			if (value == null)
+				value = "NO VALUE FOUND";
+			if (property.getName() != null)
+				shortCutParams.put(property.getName(), value);
+			else
+				shortCutParams.put(property.getId(), value);
+		}
+		templateMap.put("shortCutParams", shortCutParams);
 		
 		//If this is the history view, we add the required objects to the template map
 		if(historyEnabled){

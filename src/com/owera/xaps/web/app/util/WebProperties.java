@@ -1,9 +1,13 @@
 package com.owera.xaps.web.app.util;
 
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.Map.Entry;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import com.owera.common.log.Logger;
 import com.owera.common.util.PropertyReader;
@@ -240,5 +244,89 @@ public class WebProperties {
 	 */
 	public Boolean getShowVoip() {
 		return getBoolean("unit.dash.voip", false);
+	}
+	
+	/**
+	 * Gives the customization to the dash display as defined in the
+	 * web properties file.
+	 * 
+	 * @param unittypeName The unit type name to find settings for
+	 * @return List of CustomDashDisplayProperty containing the settings
+	 */
+	public List<CustomDashProperty> getCustomDash(String unittypeName) {
+		String regex = "^custom\\.dash\\.\\*.*";	
+		if (unittypeName != null && !unittypeName.isEmpty())
+			regex += "|^custom\\.dash\\." + unittypeName + ".*";
+		
+		List<CustomDashProperty> configDisplay = new LinkedList<CustomDashProperty>();
+		
+		for (String key : getFilteredKeys(regex))
+			configDisplay.add(new CustomDashProperty(getProperty(key)));
+		
+		return configDisplay;
+	}
+	
+	/** 
+	 * Gets the keys in the web properties that matches a certain 
+	 * regular expression.
+	 * 
+	 * @param regex
+	 * @return A list containing the resulting keys
+	 */
+	private List<String> getFilteredKeys(String regex) {
+		List<String> keys = new LinkedList<String>();
+		
+		Pattern pattern = Pattern.compile(regex);
+		
+		for (String key : pr.getPropertyMap().keySet())
+			if (pattern.matcher(key).matches())
+				keys.add(key);
+		
+		return keys;
+	}
+	
+	/**
+	 * Class to hold a property for the custom dash display
+	 */
+	public class CustomDashProperty {
+		
+		private String id, name;
+
+		public CustomDashProperty(String id, String name) {
+			super();
+			this.id = id;
+			this.name = name;
+		}
+		
+		/**
+		 * Based on the way properties custom dash properties is expressed
+		 * in the web properties file the object is created from the raw
+		 * String representation of the property.
+		 * 
+		 * @param rawProperty
+		 */
+		public CustomDashProperty(String rawProperty) {
+			super();
+			String[] parts = rawProperty.split("\\;");
+			this.setId(parts[0].trim());
+			if (parts.length > 1)
+				this.setName(parts[1].trim());
+		}
+		
+		public String getId() {
+			return id;
+		}
+
+		public void setId(String id) {
+			this.id = id;
+		}
+
+		public String getName() {
+			return name;
+		}
+
+		public void setName(String name) {
+			this.name = name;
+		}
 	}
 }

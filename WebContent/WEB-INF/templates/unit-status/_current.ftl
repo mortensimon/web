@@ -210,6 +210,25 @@
 			</tr>
 		</tbody></table>
 		</fieldset>
+		<#if shortCutParams?has_content>
+		<fieldset>
+		<legend>Custom parameters</legend>
+		<table style="width:100%"><tbody>
+			<#list shortCutParams.entrySet() as entry>
+				<tr>
+                	<td align="left">${entry.key}:</th> 
+					<td>
+						<#if entry.value?matches("^https://.*|^http://.*")>
+							<a href="${entry.value}">${entry.value}</a>
+						<#else>
+							${entry.value}
+						</#if>
+					</td>
+				</tr>
+			</#list>
+		</tbody></table>
+		</fieldset>
+		</#if>
 	</fieldset>
 </td>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
