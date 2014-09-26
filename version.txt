@@ -1,3 +1,10 @@
+v2.2.54 (2014-09-23)
+- ref: removed Certificate stuff - a report is locked up:), a menu item is removed
+v2.2.53 (2014-09-19)
+- ref: Fusion -> FreeACS (name change)
+- ref: Made Unit configuration page more responsive through use "Filter"-button (previously a bit sluggish when filtering was done on every keypress in the filter)
+- ref: Removed stuff related to Pingcom's VoIP and Hardware messages through usage of new properties in xaps-web.properties
+- bug: Do not change profile in Unit configuration unless explicitly pressing the "Move to" button
 v2.2.52 (2014-09-03)
 - bug: changed a URL in xaps-web.properties to point to port 80 by default
 - bug: some references to "xapsmonitor" was corrected to "monitor"

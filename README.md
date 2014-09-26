@@ -1,4 +1,4 @@
-FreeACS Fusion - Web Server
+FreeACS - Web Server
 ===========================
 This project is a just a part of the whole product. Get the full picture here: 
 http://www.freeacs.com/

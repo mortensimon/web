@@ -1,6 +1,6 @@
 <@macros.form name="form1" fieldset="Shortcuts">
 	<ul style="list-style: none;">
-		<li><img width="20px" src="images/icon_report.png" border="0" />Fusion reports
+		<li><img width="20px" src="images/icon_report.png" border="0" />FreeACS reports
 			<ul>
 				<li><a href="${URL_MAP.REPORT}&type=Unit">Unit report</a></li>
 				<li><a href="${URL_MAP.REPORT}&type=Group">Group report</a></li>

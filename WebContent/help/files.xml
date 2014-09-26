@@ -35,10 +35,10 @@
 				Type 
             </Heading>
 			<Help>
-				Currently Fusion supports 5 types of files:&lt;p&gt;
+				Currently the system supports 5 types of files:&lt;p&gt;
 				SOFTWARE - Usually a firmware image for a CPE. The firmware version
 				number must match the version number of the file&lt;p&gt;
-				SHELL_SCRIPT - A Fusion Shell Script, upload here to be able to run 
+				SHELL_SCRIPT - A FreeACS Shell Script, upload here to be able to run 
 				it as part of a Job, Syslog Event or a Trigger. The file will be modified 
 				to include your username, so the ShellDaemon running the script
 				will run with the correct access rights.&lt;p&gt;

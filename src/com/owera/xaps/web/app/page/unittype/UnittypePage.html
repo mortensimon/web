@@ -1,5 +1,5 @@
 <p>In the Unit Type page, you can create, update or delete Unit Type and its parameters. In
-order to create a new Unit Type, the Fusion Administrator has to enter a model name,
+order to create a new Unit Type, the Administrator has to enter a model name,
 matcher id, vendor, protocol and some description related to it. You can choose values
 freely, except for the matcher id. This id important if and only if you are going to use OPP
 provisioning and must be set according to the OPP clients (in other words: the value
@@ -26,11 +26,11 @@ the default value.</p>
 <ul>
 	<li><b>R</b>ead-Only: The parameter can only be read from the device, never written</li>
 	<li><b>R</b>ead<b>W</b>rite: The parameter can only be written to the device, never read</li>
-	<li><b>X</b>(System): The parameter controls the behaviour of Fusion - never provisioned</li>
-	<li><b>A</b>lwaysRead: Optional parameter. If combined with an R parameter, it will make Fusion always read and store this parameter</li>
-	<li><b>C</b>onfidential: Optional parameter. Set on passwords to avoid showing the value in logs etc. Also necessary to avoid warnings in Fusion.</li>
+	<li><b>X</b>(System): The parameter controls the behaviour of the system - never provisioned</li>
+	<li><b>A</b>lwaysRead: Optional parameter. If combined with an R parameter, it will make the system always read and store this parameter</li>
+	<li><b>C</b>onfidential: Optional parameter. Set on passwords to avoid showing the value in logs etc. Also necessary to avoid warnings in the system.</li>
 	<li><b>D</b>isplayable: Optional parameter. Set on parameter to add a column to the Search Page output.</li>
-	<li><b>I</b>nspection: Optional parameter. If set on a parameter, it will be retrieved from the device in inspection mode. After inspection mode it will be deleted from Fusion.</li>
+	<li><b>I</b>nspection: Optional parameter. If set on a parameter, it will be retrieved from the device in inspection mode. After inspection mode it will be deleted from the system.</li>
 	<li><b>S</b>earchable: Optional parameter: Set on parameter to add a search field on the Search Page.</li>					
 </ul>
 <p>Not all combinations of parameters are allowed (examples:ARW or AIX) because the purpose of the flags
@@ -39,7 +39,7 @@ defeat each other.
 
 <p>
 	In the links section you can find "Manage syslog events". This is useful if you have devices
-	that emit syslog messages to your Fusion Syslog Server. If that is the case, you may specify 
+	that emit syslog messages to your Syslog Server. If that is the case, you may specify 
 	events to categorize a certain syslog message. A syslog event must have an id, which is a number larger
 	than 1000. Name and description are also nice to add. The expression field is crucial; here you
 	enter a regular expression which match the syslog message you're after. Usually that would simply
