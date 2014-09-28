@@ -1,9 +1,12 @@
 package com.owera.xaps.web.app.util;
 
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.Map.Entry;
+import java.util.regex.Pattern;
 
 import com.owera.common.log.Logger;
 import com.owera.common.util.PropertyReader;
@@ -240,5 +243,49 @@ public class WebProperties {
 	 */
 	public Boolean getShowVoip() {
 		return getBoolean("unit.dash.voip", false);
+	}
+	
+	/**
+	 * Gives the customization to the dash display as defined in the
+	 * web properties file.
+	 * 
+	 * @param unittypeName The unit type name to find settings for
+	 * @return List of CustomDashDisplayProperty containing the settings
+	 */
+	public Map<String, String> getCustomDash(String unittypeName) {
+		String regex = "^custom\\.dash\\.\\*.*";	
+		if (unittypeName != null && !unittypeName.isEmpty())
+			regex += "|^custom\\.dash\\." + unittypeName + ".*";
+		
+		Map<String, String> configDisplay = new HashMap<String, String>();
+		
+		for (String key : getFilteredKeys(regex)) {
+			String[] parts = getProperty(key).split("\\;");
+			if (parts.length > 1)
+				configDisplay.put(parts[0], parts[1]);
+			else
+				configDisplay.put(parts[0], null);
+		}
+		
+		return configDisplay;
+	}
+	
+	/** 
+	 * Gets the keys in the web properties that matches a certain 
+	 * regular expression.
+	 * 
+	 * @param regex
+	 * @return A list containing the resulting keys
+	 */
+	private List<String> getFilteredKeys(String regex) {
+		List<String> keys = new LinkedList<String>();
+		
+		Pattern pattern = Pattern.compile(regex);
+		
+		for (String key : pr.getPropertyMap().keySet())
+			if (pattern.matcher(key).matches())
+				keys.add(key);
+		
+		return keys;
 	}
 }
