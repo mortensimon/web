@@ -262,9 +262,9 @@ public class WebProperties {
 		for (String key : getFilteredKeys(regex)) {
 			String[] parts = getProperty(key).split("\\;");
 			if (parts.length > 1)
-				configDisplay.put(parts[0], parts[1]);
+				configDisplay.put(parts[0].trim(), parts[1].trim());
 			else
-				configDisplay.put(parts[0], null);
+				configDisplay.put(parts[0].trim(), null);
 		}
 		
 		return configDisplay;

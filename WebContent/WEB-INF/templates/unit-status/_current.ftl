@@ -163,7 +163,7 @@
 		<table style="width:100%"><tbody>
 			<#if showVoip>
 				<tr>
-					<th align="left" title="This gives an hint to the average call quality of both VoIP lines." class="tiptip">VoIP quality:</th>
+					<th align="left" width="150px;" title="This gives an hint to the average call quality of both VoIP lines." class="tiptip">VoIP quality:</th>
 					<td>
 						<div id="unitTotalScore"><img src="images/spinner.gif" alt="wait" /></div>
 					</td>
@@ -187,7 +187,7 @@
 			</tr>
 			<#if showHardware>
 				<tr>
-					<th align="left">Hardware status:</th>
+					<th align="left" width="150px;">Hardware status:</th>
 					<td>
 						<#if (info.overallStatus.hardwareEffect>0)>
 						<font color="red">Errors have been logged</font>
@@ -216,10 +216,10 @@
 		<table style="width:100%"><tbody>
 			<#list shortCutParams.entrySet() as entry>
 				<tr>
-                	<td align="left">${entry.key}:</th> 
+                	<th align="left" width="150px;">${entry.key}:</th> 
 					<td>
 						<#if entry.value?matches("^https://.*|^http://.*")>
-							<a href="${entry.value}">${entry.value}</a>
+							<a href="${entry.value}" target="_new">${entry.value}</a>
 						<#else>
 							${entry.value}
 						</#if>
