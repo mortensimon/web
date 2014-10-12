@@ -1,6 +1,8 @@
 package com.owera.xaps.web.app.util;
 
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -257,7 +259,7 @@ public class WebProperties {
 		if (unittypeName != null && !unittypeName.isEmpty())
 			regex += "|^custom\\.dash\\." + unittypeName + ".*";
 		
-		Map<String, String> configDisplay = new HashMap<String, String>();
+		Map<String, String> configDisplay = new LinkedHashMap<String, String>();
 		
 		for (String key : getFilteredKeys(regex)) {
 			String[] parts = getProperty(key).split("\\;");
@@ -286,6 +288,7 @@ public class WebProperties {
 			if (pattern.matcher(key).matches())
 				keys.add(key);
 		
+		Collections.sort(keys);
 		return keys;
 	}
 }

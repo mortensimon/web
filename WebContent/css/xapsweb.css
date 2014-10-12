@@ -263,6 +263,12 @@ table.unitjobs caption {
 	padding-bottom: 5px;
 }
 
+/* --------------- Tables in the dashboard ---*/
+td.dashboard table th {
+	text-align: left;
+	width: 150px;
+}
+
 /* --------------- Tables for parameters ---*/
 table.parameter {
 	width: 100%;
