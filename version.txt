@@ -1,3 +1,5 @@
+v2.2.55 (2014-09-28)
+- add: Dashboard updated to add custom parameters - will make the dashboard much more useful. The parameters are configured in xaps-web.properties.
 v2.2.54 (2014-09-23)
 - ref: removed Certificate stuff - a report is locked up:), a menu item is removed
 v2.2.53 (2014-09-19)
