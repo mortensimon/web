@@ -18,6 +18,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -254,10 +255,10 @@ public class UnitStatusPage extends AbstractWebPage {
 		
 		// Custom set properties that are to be displayed
 		String unittypeName = unit.getUnittype().getName();
-		Map<String, String> shortCutParams = new HashMap<String, String>();
+		Map<String, String> shortCutParams = new LinkedHashMap<String, String>();
 		for (Entry<String, String> property : WebProperties.getWebProperties().getCustomDash(unittypeName).entrySet()) {
 			// Call to resolve any parameter referencing other parameters
-			String propValue = getParameterValue(property.getKey());
+			String propValue = resolveParameters(property.getKey());
 			if (property.getValue() != null)
 				shortCutParams.put(property.getValue(), propValue);
 			else
@@ -898,7 +899,7 @@ public class UnitStatusPage extends AbstractWebPage {
 	 * @param The original parameter to search for.
 	 * @return The parameter with any one step references resolved
 	 */
-	private String getParameterValue(String key) {
+	private String resolveParameters(String key) {
 		String value = currentUnit.getParameterValue(key);
 		if (value != null) {
 			Matcher matcher = paramRefPattern.matcher(value);
