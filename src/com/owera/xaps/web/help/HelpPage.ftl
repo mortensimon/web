@@ -32,6 +32,5 @@
 			</fieldset>
 		</form>
 		<!--<p>Successfully generated at <b>${time?string("yyyy-MM-dd HH:mm")}</b></p>-->
-		<p>Copyright &copy; ${time?string("yyyy")} by Ping Communication AS</p>
 	</body>
 </html>

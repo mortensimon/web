@@ -1,3 +1,7 @@
+v2.2.57 (2014-11-08)
+- ref: Updated logic concerning branding of the product. Removed/changed some text referring specifically to FreeACS/Ping,
+added some logic to specify own brand. 
+- bug: Missing license information about 3rd party libraries
 v2.2.56 (2014-10-27)
 - ref: Dashboard improvement, possible to sort the parameters listed
 v2.2.55 (2014-09-28)

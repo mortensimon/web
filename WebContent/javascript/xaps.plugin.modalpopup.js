@@ -11,7 +11,7 @@
  * 
  * Up to date code can be found at http://submodal.googlecode.com
  * 
- * Modified by Jarl Andr� H�benthal for Ping Communication AS
+ * Modified by Jarl Andr� H�benthal
  * 
  * @deprecated Should be discarded. Use xaps.plugin.iframedialogs.js instead.
  * 
