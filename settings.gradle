@@ -1,0 +1,5 @@
+rootProject.name = "web"
+include "dbi"
+include "common"
+project(":dbi").projectDir = file("../dbi")
+project(":common").projectDir = file("../common")

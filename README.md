@@ -3,6 +3,8 @@ FreeACS - Web Server
 This project is a just a part of the whole product. Get the full picture here: 
 http://www.freeacs.com/
 
+[![Build Status](https://travis-ci.org/jarlah/web.svg?branch=master)](https://travis-ci.org/jarlah/web)
+
 Dependencies
 ------------
 https://github.com/freeacs/common.git  
@@ -17,6 +19,12 @@ Jarfiles needed to make WAR file and run the project is part of the project
 (WebContent/WEB-INF/lib), but these may of course be exchanged for newer 
 versions (if necessary) upon making a WAR file. 
 
+Gradle
+------
+./gradlew war
+./gradlew eclipse
+./gradlew cleanEclipse
+./gradlew test
 
 Eclipse setup
 -------------
