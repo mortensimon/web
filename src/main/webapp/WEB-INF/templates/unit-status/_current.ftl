@@ -1,36 +1,36 @@
 <script src="javascript/xaps.module.unit.dashboard.js" tyoe="text/javascript"></script>
-<td valign="top">
+<td valign="top" class="dashboard">
 	<fieldset>
 		<legend>${UNIT_DASHBOARD}</legend>
 		<fieldset>
 		<legend>${BASIC_INFO}</legend>
 		<table style="width:100%"><tbody>
 			<tr>
-				<th align="left" width="150px;">${UNIT_TYPE}:&nbsp;</th>
+				<th>${UNIT_TYPE}:&nbsp;</th>
 				<td>
 					<a href="${URL_MAP.UNITTYPE}&unittype=${info.unit.unittype.name?url}">${info.unit.unittype.name}</a>
 				</td>
 			</tr>
 			<tr>
-				<th align="left">${PROFILE}:&nbsp;</th>
+				<th>${PROFILE}:&nbsp;</th>
 				<td>
 					<a href="${URL_MAP.PROFILE}&profile=${info.unit.profile.name?url}">${info.unit.profile.name}</a>
 				</td>
 			</tr>
 			<tr>
-				<th align="left">${SERIAL_NUMBER}:&nbsp;</th>
+				<th>${SERIAL_NUMBER}:&nbsp;</th>
 				<td>
 					<a href="${URL_MAP.UNIT}&unit=${info.unit.id?url}" title="Go to Unit configuration" class="tiptip"><#if info.serialNumber??>${info.serialNumber!}<#else>${info.unit.id}</#if></a>
 				</td>
 			</tr>
 			<tr>
-				<th align="left">${SOFTWARE_VERSION}:&nbsp;</th>
+				<th>${SOFTWARE_VERSION}:&nbsp;</th>
 				<td>
 					${info.softwareVersion!}<#if info.desiredSoftwareVersion?? && (!info.softwareVersion?? || info.desiredSoftwareVersion!=info.softwareVersion)>&nbsp;<img src="images/Exclamation.gif" height="12px;" alt="pending upgrade" title="An upgrade is pending to ${info.desiredSoftwareVersion!}" class="tiptip" /></#if>
 				</td>
 			</tr>
 			<tr>
-				<th align="left">${IP_ADDRESS}:</th>
+				<th>${IP_ADDRESS}:</th>
 				<td>
 					<#if info.ipAddress??>
 						${info.ipAddress!}
@@ -40,7 +40,7 @@
 				</td>
 			</tr>
 			<tr>
-				<th align="left">Behind Gateway/NAT:</th>
+				<th>Behind Gateway/NAT:</th>
 				<td>
 					<#if info.isBehindNat()>
 						Yes
@@ -50,7 +50,7 @@
 				</td>
 			</tr>
 			<tr>
-				<th align="left">Supports TR-111:</th>
+				<th>Supports TR-111:</th>
 				<td style="font-weight:bold;<#if info.supportsTr111()>color:green<#else>color:red</#if>;">
 					<#if info.supportsTr111()>
 						Yes
@@ -71,7 +71,7 @@
 		<legend>${UNIT_DASHBOARD_CURRENT}</legend>
 		<table style="width:100%"><tbody>
 			<tr>
-				<th align="left" width="150px;">${FIRST_MANAGEMENT}:&nbsp;</th>
+				<th>${FIRST_MANAGEMENT}:&nbsp;</th>
 				<td>
 					<#if info.firstConnectTimestamp??>
 					${info.firstConnectTimestamp!}
@@ -81,7 +81,7 @@
 				</td>
 			</tr>
 			<tr>
-				<th align="left">${LAST_MANAGEMENT}:&nbsp;</th>
+				<th>${LAST_MANAGEMENT}:&nbsp;</th>
 				<td style="font-weight:bold;<#if info.withinServiceWindow>color:green<#else>color:red</#if>;">
 					<#if info.lastConnectTimestamp??>
 					${info.lastConnectTimestamp!}
@@ -96,7 +96,7 @@
 				</#if>
 			</tr>
 			<tr>
-				<th align="left">${NEXT_MANAGEMENT}:&nbsp;</th>
+				<th>${NEXT_MANAGEMENT}:&nbsp;</th>
 				<td>
 					<#if info.nextConnectTimestamp??>
 					${info.nextConnectTimestamp!}
@@ -107,7 +107,7 @@
 			</tr>
 			<#if info.line1Applicable>
 			<tr>
-				<th align="left" width="150px;">${format(LINE_STATUS,1)}:</th>
+				<th>${format(LINE_STATUS,1)}:</th>
 				<td>
 					<#if info.line1Configured && !info.line1Registered>
 					<font color="#FFC62D"><b>Configured, not registered</b></font>
@@ -134,7 +134,7 @@
 				</#if>
 			</tr>
 		    <tr>
-				<th align="left">${format(LINE_STATUS,2)}:</th>
+				<th>${format(LINE_STATUS,2)}:</th>
 				<td>
 					<#if info.line2Configured && !info.line2Registered>
 					<font color="#FFC62D"><b>Configured, not registered</b></font>
@@ -163,7 +163,7 @@
 		<table style="width:100%"><tbody>
 			<#if showVoip>
 				<tr>
-					<th align="left" title="This gives an hint to the average call quality of both VoIP lines." class="tiptip">VoIP quality:</th>
+					<th title="This gives an hint to the average call quality of both VoIP lines." class="tiptip">VoIP quality:</th>
 					<td>
 						<div id="unitTotalScore"><img src="images/spinner.gif" alt="wait" /></div>
 					</td>
@@ -171,7 +171,7 @@
 				</tr>
 			</#if>
 			<tr>
-				<th align="left" width="150px;">Syslog status:</th>
+				<th>Syslog status:</th>
 				<td>
 					<#if (info.overallStatus.syslogEffect>0)>
 					<font color="red">Errors have been logged</font>
@@ -187,7 +187,7 @@
 			</tr>
 			<#if showHardware>
 				<tr>
-					<th align="left">Hardware status:</th>
+					<th>Hardware status:</th>
 					<td>
 						<#if (info.overallStatus.hardwareEffect>0)>
 						<font color="red">Errors have been logged</font>
@@ -210,6 +210,25 @@
 			</tr>
 		</tbody></table>
 		</fieldset>
+		<#if shortCutParams?has_content>
+		<fieldset>
+		<legend>Custom parameters</legend>
+		<table style="width:100%"><tbody>
+			<#list shortCutParams.entrySet() as entry>
+				<tr>
+                	<th>${entry.key}:</th> 
+					<td>
+						<#if entry.value?matches("^https://.*|^http://.*")>
+							<a href="${entry.value}" target="_new">${entry.value}</a>
+						<#else>
+							${entry.value}
+						</#if>
+					</td>
+				</tr>
+			</#list>
+		</tbody></table>
+		</fieldset>
+		</#if>
 	</fieldset>
 </td>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>

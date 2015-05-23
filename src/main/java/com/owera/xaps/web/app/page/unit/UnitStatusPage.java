@@ -18,8 +18,12 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -248,6 +252,19 @@ public class UnitStatusPage extends AbstractWebPage {
 		
 		templateMap.put("showVoip", WebProperties.getWebProperties().getShowVoip());
 		templateMap.put("showHardware", WebProperties.getWebProperties().getShowHardware());
+		
+		// Custom set properties that are to be displayed
+		String unittypeName = unit.getUnittype().getName();
+		Map<String, String> shortCutParams = new LinkedHashMap<String, String>();
+		for (Entry<String, String> property : WebProperties.getWebProperties().getCustomDash(unittypeName).entrySet()) {
+			// Call to resolve any parameter referencing other parameters
+			String propValue = resolveParameters(property.getKey());
+			if (property.getValue() != null)
+				shortCutParams.put(property.getValue(), propValue);
+			else
+				shortCutParams.put(property.getKey(), propValue);
+		}
+		templateMap.put("shortCutParams", shortCutParams);
 		
 		//If this is the history view, we add the required objects to the template map
 		if(historyEnabled){
@@ -862,5 +879,46 @@ public class UnitStatusPage extends AbstractWebPage {
 		if(methods.contains(suppliedMethod))
 			return suppliedMethod;
 		return methods.get(0);
+	}
+	
+
+	private static Pattern paramRefPattern = Pattern.compile("(\\$\\{([^\\}]+)\\})");
+	/**
+	 * This method attempts to resolve any references to other parameters by looking for
+	 * references with the syntax ${<other_parameter>} in the parameter from the unit.
+	 * 
+	 * If this pattern is not detected the value is returned as it is.
+	 * 
+	 * If this pattern is detected the first match will be considered a reference and 
+	 * will be attempted to be resolved by a call to the current unit for the new 
+	 * parameter. Anything before and after this match will be appended to the new value
+	 * meaning that you can add other information to the referenced parameter. For
+	 * instance: "https://${IP_parameter_reference}" if you want an IP-address to be
+	 * appended with a https:// input.
+	 * 
+	 * @param The original parameter to search for.
+	 * @return The parameter with any one step references resolved
+	 */
+	private String resolveParameters(String key) {
+		String value = currentUnit.getParameterValue(key);
+		if (value != null) {
+			Matcher matcher = paramRefPattern.matcher(value);
+			if (matcher.find()) {
+				StringBuilder param = new StringBuilder();
+				if (matcher.start() > 0)
+					param.append(value.substring(0, matcher.start()));
+				
+				String newValue = currentUnit.getParameterValue(matcher.group(2));
+				if (newValue != null && !newValue.isEmpty())
+					param.append(newValue);
+				if (matcher.end() < value.length())
+					param.append(value.substring(matcher.end()));
+				value = param.toString();
+			}
+		}
+		if (value == null || value.isEmpty())
+			value = "NO VALUE";
+
+		return value;
 	}
 }

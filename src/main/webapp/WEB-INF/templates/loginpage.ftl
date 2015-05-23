@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 	<head>
-		<title>FreeACS Web | login</title>
+		<title>${TITLE_DESCRIPTION} Web | login</title>
 		<#include "/meta/basic.ftl">
 		<script src="javascript/jquery-1.4.4.js"></script>
 		<script src="javascript/jquery.sha1.js"></script>
@@ -24,7 +24,7 @@
 			<div class="center_box" id="bodylogon">
 				<form action="login" id="loginForm" method="post" class="unit">
 					<fieldset id="logondiv">
-						<legend>FreeACS Login</legend>
+						<legend>${LOGIN_LEGEND}</legend>
 						<table>
 							<tr>
 								<td align="right">

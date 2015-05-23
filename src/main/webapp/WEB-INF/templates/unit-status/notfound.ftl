@@ -12,7 +12,7 @@
 				<br /><br />
 				They can be provisioned to another xAPS server, or provisioning is turned off for that particular unit.
 				<br /><br />
-				Contact your System Administrator for more help, or Ping Communication for support.
+				Contact your System Administrator for more help.
 			</p>
 		</div>
 	</fieldset>

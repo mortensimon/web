@@ -87,12 +87,14 @@ public class UnitListPage extends AbstractWebPage {
 
 		Map<String, Object> root = outputHandler.getTemplateMap();
 
+		/*
 		Certificate cert = xaps.getCertificates().getCertificate(Certificate.CERT_TYPE_REPORT);
 		if (cert == null || cert.isValid(null) == false || !SessionCache.getSessionData(req.getHttpServletRequest().getSession().getId()).getUser().isReportsAllowed()) {
 			root.put("message", "No valid certificate found for Reports page. Please contact your systems administrator.");
 			outputHandler.setTemplatePath("/exception.ftl");
 			return;
 		}
+		*/
 
 		xapsUnit = XAPSLoader.getXAPSUnit(req.getSession().getId());
 

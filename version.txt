@@ -1,3 +1,13 @@
+v2.2.57 (2014-11-08)
+- ref: Updated logic concerning branding of the product. Removed/changed some text referring specifically to FreeACS/Ping,
+added some logic to specify own brand. 
+- bug: Missing license information about 3rd party libraries
+v2.2.56 (2014-10-27)
+- ref: Dashboard improvement, possible to sort the parameters listed
+v2.2.55 (2014-09-28)
+- add: Dashboard updated to add custom parameters - will make the dashboard much more useful. The parameters are configured in xaps-web.properties.
+v2.2.54 (2014-09-23)
+- ref: removed Certificate stuff - a report is locked up:), a menu item is removed
 v2.2.53 (2014-09-19)
 - ref: Fusion -> FreeACS (name change)
 - ref: Made Unit configuration page more responsive through use "Filter"-button (previously a bit sluggish when filtering was done on every keypress in the filter)

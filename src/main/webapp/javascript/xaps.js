@@ -212,9 +212,7 @@
  * 
  * TEMPLATES
  * /WebContent/WEB-INF/templates/meta/web.ftl // Included by index.ftl
- * 
- * Copyright©2010 Ping Communication AS, All rights reserved
- * 
+ *  
  * @author Jarl Andre Hubenthal
  * 
  * @module xAPS
