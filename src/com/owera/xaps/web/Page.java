@@ -51,6 +51,7 @@ import com.owera.xaps.web.app.page.unittype.UnittypeOverviewPage;
 import com.owera.xaps.web.app.page.unittype.UnittypePage;
 import com.owera.xaps.web.app.page.unittype.UnittypeParametersPage;
 import com.owera.xaps.web.app.page.window.WindowPage;
+import com.owera.xaps.web.app.util.SessionCache;
 
 /**
  * <p>An enumeration of all defined pages in xAPS Web with their request id, page class and icon url.</p>
@@ -437,10 +438,13 @@ public enum Page {
 	 * What this method does is to add the required pages needed by the pages in the provided list.
 	 * 
 	 * @param list the liist of Page enums
+	 * @param sessionId 
 	 */
-	public static void addRequiredPages(List<Page> list) {
+	public static void addRequiredPages(List<Page> list, String sessionId) {
 		list.add(LOGIN);
-		list.add(PERMISSIONS);
+		if (SessionCache.getSessionData(sessionId).getUser().isAdmin()) {
+			list.add(PERMISSIONS);
+		}
 		if (list.contains(TOPMENU_ADV)) {
 			list.add(CREATETRIGGER);
 			list.add(TRIGGEROVERVIEW);

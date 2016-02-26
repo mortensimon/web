@@ -32,10 +32,11 @@ public class WebUser extends User {
 
 	/**
 	 * We cache allowed pages because there is no need to recalculate after the user has logged in.
+	 * @param sessionId 
 	 *
 	 * @return A list of page ids
 	 */
-	public List<String> getAllowedPages() {
+	public List<String> getAllowedPages(String sessionId) {
 		if (allowedPages == null) {
 			String access = getAccess().split(";")[0];
 			if (access.startsWith("WEB[") && access.endsWith("]")) {
@@ -44,7 +45,7 @@ public class WebUser extends User {
 				List<String> arr = Arrays.asList(access.split(","));
 				List<String> list = new ArrayList<String>(arr);
 				List<Page> pages = Page.getPageValuesFromList(list);
-				Page.addRequiredPages(pages);
+				Page.addRequiredPages(pages, sessionId);
 				list = Page.getStringValuesFromList(pages);
 				allowedPages = list;
 			} else {
@@ -59,11 +60,12 @@ public class WebUser extends User {
 
 	/**
 	 * Checks if is reports allowed.
+	 * @param sessionId 
 	 *
 	 * @return true, if is reports allowed
 	 */
-	public boolean isReportsAllowed() {
-		List<String> pages = getAllowedPages();
+	public boolean isReportsAllowed(String sessionId) {
+		List<String> pages = getAllowedPages(sessionId);
 		return pages.contains(Page.REPORT.getId()) || pages.contains(WebConstants.ALL_PAGES);
 	}
 
