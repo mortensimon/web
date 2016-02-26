@@ -186,7 +186,9 @@ public abstract class AbstractWebPage implements WebPage {
 		long ms = estimatedTime / 1000000l;
 		StringBuilder sb = new StringBuilder();
 		Formatter formatter = new Formatter(sb, Locale.US);
-		return formatter.format("%s in %d ms", msg,ms).toString();
+		String toReturn = formatter.format("%s in %d ms", msg,ms).toString();
+		formatter.close();
+		return toReturn;
 	}
 	
 	/**
