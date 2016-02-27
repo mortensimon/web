@@ -62,16 +62,6 @@ public class WebUser extends User {
 	private List<String> allowedPages;
 
 	/**
-	 * Checks if is reports allowed.
-	 *
-	 * @return true, if is reports allowed
-	 */
-	public boolean isReportsAllowed(String sessionId) {
-		List<String> pages = getAllowedPages(sessionId);
-		return pages.contains(Page.REPORT.getId()) || pages.contains(WebConstants.ALL_PAGES);
-	}
-
-	/**
 	 * Checks if is authenticated.
 	 *
 	 * @return true, if is authenticated
