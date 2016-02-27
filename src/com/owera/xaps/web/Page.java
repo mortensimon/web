@@ -440,7 +440,6 @@ public enum Page {
 	 */
 	public static void addRequiredPages(List<Page> list) {
 		list.add(LOGIN);
-		list.add(PERMISSIONS);
 		if (list.contains(TOPMENU_ADV)) {
 			list.add(CREATETRIGGER);
 			list.add(TRIGGEROVERVIEW);
