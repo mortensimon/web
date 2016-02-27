@@ -1,3 +1,7 @@
+v2.2.59 (2016-02-27)
+- ref: Refactoring separation of concerns
+v2.2.58 (2016-02-26)
+- ref: Hide permissions page for non admin users
 v2.2.57 (2014-11-08)
 - ref: Updated logic concerning branding of the product. Removed/changed some text referring specifically to FreeACS/Ping,
 added some logic to specify own brand. 

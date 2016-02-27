@@ -1,5 +1,6 @@
 package com.owera.xaps.web.app.page.staging;
 
+import java.util.List;
 import java.util.Map;
 
 import com.owera.xaps.dbi.Users;
@@ -22,8 +23,12 @@ public class StagingPage extends AbstractWebPage {
 	public void process(ParameterParser params, Output outputHandler) throws Exception {
 		Map<String, Object> root = outputHandler.getTemplateMap();
 		
-		WebUser user = SessionCache.getSessionData(params.getSession().getId()).getUser();
-		boolean displayDistributorLink = (user!=null&&user.getAccess().equals(Users.ACCESS_ADMIN))||(user!=null && user.getAllowedPages()!=null && user.getAllowedPages().contains("distributors"));
+		String sessionId = params.getSession().getId();
+		WebUser user = SessionCache.getSessionData(sessionId).getUser();
+		boolean hasAdminAccess = user != null && user.getAccess().equals(Users.ACCESS_ADMIN);
+		List<String> allowedPages = user.getAllowedPages(sessionId);
+		boolean isAllowedToViewPage = user != null && allowedPages != null && allowedPages.contains("distributors");
+		boolean displayDistributorLink = hasAdminAccess || isAllowedToViewPage;
 		root.put("ADMIN", displayDistributorLink);
 		
 		outputHandler.setTemplatePathWithIndex("staging");

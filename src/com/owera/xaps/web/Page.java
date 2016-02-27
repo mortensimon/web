@@ -437,10 +437,12 @@ public enum Page {
 	 * What this method does is to add the required pages needed by the pages in the provided list.
 	 * 
 	 * @param list the liist of Page enums
+	 * @param sessionId 
 	 */
-	public static void addRequiredPages(List<Page> list) {
+	public static List<Page> addRequiredPages() {
+		List<Page> list = new ArrayList<Page>();
+
 		list.add(LOGIN);
-		list.add(PERMISSIONS);
 		if (list.contains(TOPMENU_ADV)) {
 			list.add(CREATETRIGGER);
 			list.add(TRIGGEROVERVIEW);
@@ -515,6 +517,8 @@ public enum Page {
 			list.add(REPORT);
 			list.add(UNITLIST);
 		}
+
+		return list;
 	}
 
 	/**
