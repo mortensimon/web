@@ -39,7 +39,7 @@ public class Main extends HttpServlet {
 	private static Logger logger = new Logger();
 
 	/** The Constant version. */
-	public static final String version = "2.2.57";
+	public static final String version = "2.2.58";
 
 	/** The config. */
 	private Configuration config;
