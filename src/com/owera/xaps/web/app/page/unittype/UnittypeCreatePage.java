@@ -112,7 +112,7 @@ public class UnittypeCreatePage extends AbstractWebPage {
 		}
 
 		outputHandler.getTemplateMap().put("unittypesInProtocol", unittypesToCopyFrom);
-		DropDownSingleSelect<String> protocols = InputSelectionFactory.getDropDownSingleSelect(inputData.getNewProtocol(), inputData.getNewProtocol().getString(), Arrays.asList("N/A", "TR-069", "OPP"));
+		DropDownSingleSelect<String> protocols = InputSelectionFactory.getDropDownSingleSelect(inputData.getNewProtocol(), inputData.getNewProtocol().getString(), Arrays.asList(UnittypePage.NA_PROTOCOL, UnittypePage.TR069_PROTOCOL));
 		outputHandler.getTemplateMap().put("protocols", protocols);
 
 		outputHandler.setTemplatePath("unit-type/create");
@@ -145,7 +145,7 @@ public class UnittypeCreatePage extends AbstractWebPage {
 		List<Unittype> unittypes = getAllowedUnittypes(sessionId);
 		List<Unittype> allowedUnittypes = new ArrayList<Unittype>();
 		if (protocol == null)
-			protocol = "N/A";
+			protocol = UnittypePage.NA_PROTOCOL;
 		for (Unittype ut : unittypes) {
 			if (ut.getProtocol().equals(protocol))
 				allowedUnittypes.add(ut);

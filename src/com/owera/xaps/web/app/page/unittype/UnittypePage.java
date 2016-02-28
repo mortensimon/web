@@ -31,6 +31,9 @@ import com.owera.xaps.web.app.util.XAPSLoader;
  */
 public class UnittypePage extends AbstractWebPage {
 
+	protected static final String NA_PROTOCOL = "N/A";
+	protected static final String TR069_PROTOCOL = "TR-069";
+
 	/** The input data. */
 	private UnittypeData inputData;
 
@@ -195,7 +198,7 @@ public class UnittypePage extends AbstractWebPage {
 			template = "/unit-type/details.ftl";
 			root.put("syslogdate", SyslogUtil.getDateString());
 			root.put("unittypes", unittypes);
-			DropDownSingleSelect<String> protocols = InputSelectionFactory.getDropDownSingleSelect(inputData.getProtocol(), unittype.getProtocol().toString(), Arrays.asList("N/A", "TR-069"));
+			DropDownSingleSelect<String> protocols = InputSelectionFactory.getDropDownSingleSelect(inputData.getProtocol(), getDisplayValueFromProtocol(unittype.getProtocol()), Arrays.asList(NA_PROTOCOL, TR069_PROTOCOL));
 			root.put("protocols", protocols);
 			root.put("unittype", unittype);
 			root.put("params", new TableElementMaker().getParameters(unittype.getUnittypeParameters().getUnittypeParameters()));
@@ -209,6 +212,17 @@ public class UnittypePage extends AbstractWebPage {
 			outputHandler.setDirectResponse("Invalid Unit Type");
 		} else {
 			outputHandler.setDirectToPage(Page.UNITTYPEOVERVIEW);
+		}
+	}
+
+	private static String getDisplayValueFromProtocol(ProvisioningProtocol protocol) {
+		switch(protocol) {
+		case NA:
+			return NA_PROTOCOL;
+		case TR069:
+			return TR069_PROTOCOL;
+		default:
+			return protocol.toString();
 		}
 	}
 }
