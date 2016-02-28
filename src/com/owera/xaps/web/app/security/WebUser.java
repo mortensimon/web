@@ -7,6 +7,7 @@ import java.util.List;
 import com.owera.xaps.dbi.User;
 import com.owera.xaps.dbi.Users;
 import com.owera.xaps.web.Page;
+import com.owera.xaps.web.app.util.SessionCache;
 import com.owera.xaps.web.app.util.WebConstants;
 
 /**
@@ -35,7 +36,7 @@ public class WebUser extends User {
 	 *
 	 * @return A list of page ids
 	 */
-	public List<String> getAllowedPages() {
+	public List<String> getAllowedPages(String sessionId) {
 		if (allowedPages == null) {
 			String access = getAccess().split(";")[0];
 			if (access.startsWith("WEB[") && access.endsWith("]")) {
@@ -45,6 +46,9 @@ public class WebUser extends User {
 				List<String> list = new ArrayList<String>(arr);
 				List<Page> pages = Page.getPageValuesFromList(list);
 				Page.addRequiredPages(pages);
+				if (SessionCache.getSessionData(sessionId).getUser().isAdmin()) {
+					pages.add(Page.PERMISSIONS);
+				}
 				list = Page.getStringValuesFromList(pages);
 				allowedPages = list;
 			} else {
@@ -56,16 +60,6 @@ public class WebUser extends User {
 
 	/** The allowed pages. */
 	private List<String> allowedPages;
-
-	/**
-	 * Checks if is reports allowed.
-	 *
-	 * @return true, if is reports allowed
-	 */
-	public boolean isReportsAllowed() {
-		List<String> pages = getAllowedPages();
-		return pages.contains(Page.REPORT.getId()) || pages.contains(WebConstants.ALL_PAGES);
-	}
 
 	/**
 	 * Checks if is authenticated.
