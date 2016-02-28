@@ -95,7 +95,7 @@ public class LoginServlet extends HttpServlet implements Filter {
 						String target = sessionData.getLastLoginTarget();
 						if (target == null || target.trim().length() == 0) //Idiot safe solution, to avoid any unknown problems
 							target = Page.SEARCH.getUrl();
-						response.sendRedirect(target);
+						response.sendRedirect(target.replaceAll("\\s", "%20"));
 					} else {
 						printLoginPage(request, response, sessionData);
 					}
