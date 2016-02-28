@@ -143,7 +143,7 @@ public class MenuServlet extends HttpServlet {
 	private static List<String> getPagesAllowed(String sessionId) {
 		SessionData sessionData = SessionCache.getSessionData(sessionId);
 		if (sessionData.getUser() != null && !sessionData.getUser().getAccess().equals(Users.ACCESS_ADMIN))
-			return sessionData.getUser().getAllowedPages();
+			return sessionData.getUser().getAllowedPages(sessionId);
 		else if (sessionData.getUser() == null || (sessionData.getUser() != null && sessionData.getUser().getAccess().equals(Users.ACCESS_ADMIN)))
 			return Page.getAllPagesAsString();
 		return null;

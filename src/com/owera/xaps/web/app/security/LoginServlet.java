@@ -95,7 +95,7 @@ public class LoginServlet extends HttpServlet implements Filter {
 						String target = sessionData.getLastLoginTarget();
 						if (target == null || target.trim().length() == 0) //Idiot safe solution, to avoid any unknown problems
 							target = Page.SEARCH.getUrl();
-						response.sendRedirect(target);
+						response.sendRedirect(target.replaceAll("\\s", "%20"));
 					} else {
 						printLoginPage(request, response, sessionData);
 					}
@@ -232,7 +232,8 @@ public class LoginServlet extends HttpServlet implements Filter {
 
 		HttpServletResponse response = (HttpServletResponse) res;
 
-		SessionData sessionData = SessionCache.getSessionData(request.getSession().getId());
+		String sessionId = request.getSession().getId();
+		SessionData sessionData = SessionCache.getSessionData(sessionId);
 
 		sessionData.setUrlMap(urlMap);
 
@@ -241,7 +242,7 @@ public class LoginServlet extends HttpServlet implements Filter {
 		String page = request.getParameter("page");
 
 		if (user != null && page != null) {
-			List<String> allowedPages = user.getAllowedPages();
+			List<String> allowedPages = user.getAllowedPages(sessionId);
 			if (allowedPages.contains(page) || (allowedPages.size() == 1 && allowedPages.contains(WebConstants.ALL_PAGES))) {
 				if (checkTimeoutAndReturn(request, response))
 					return;
